@@ -19,7 +19,7 @@
             <ul class="navigation">
                 <li><a href=".">Shop</a></li>
                 <li><a href=".">About us</a></li>
-                <li><a href=".">Modifier</a></li>
+                <li><a href="../update.php">Modifier</a></li>
                 <li><a href="../logout.php">Deconnexion</a></li>
             </ul>
         </nav>
