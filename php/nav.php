@@ -4,7 +4,7 @@ session_start();
 
 <nav>
     <ul class="navigation">
-        <li><a href=".">Shop</a></li>
+        <li><a id="shop-link" href="./shop.php">Shop</a></li>
         <li><a href=".">About us</a></li>
         <?php
         if(isset($_SESSION["PRENOM_USER"])) 
@@ -18,4 +18,13 @@ session_start();
         }
         ?>
     </ul>
+</nav>
+
+<nav id="category-nav" style="display: none;">
+    <ul class="category-navigation">
+        <?php
+        include_once('./php/get_categorie.php');
+        ?>
+    </ul>
+    <script src="./js/app.js"></script>
 </nav>

@@ -19,12 +19,29 @@
                 <label for="nom">Nom du produit</label>
                 <input type="text" class="" id="nom" name="nom" value="<?php echo $nom; ?>" required>
             </div>
+
+            <div class="">
+    <label for="categorie">Catégorie :</label>
+    <select class="" id="categorie" name="categorie" required>
+        <option value="">Sélectionnez une catégorie</option>
+        <?php
+        $result_categories = $conn->query("SELECT * FROM categorie");
+        if ($result_categories->rowCount() > 0) {
+            while ($row_category = $result_categories->fetch(PDO::FETCH_ASSOC)) {
+                $selected = ($row["ID_CATEGORIE"] == $row_category["ID_CATEGORIE"]) ? "selected" : "";
+                echo '<option value="' . $row_category['ID_CATEGORIE'] . '" ' . $selected . '>' . $row_category['NOM_CATEGORIE'] . '</option>';
+            }
+        }
+        ?>
+    </select>
+</div>
+
             <div class="">
                 <label for="tarif">Tarif (en €):</label>
                 <input type="text" class="" id="prix" name="prix" value="<?php echo $prix; ?>" required>
             </div>
             <div class="">
-                <label for="tarif">Description:</label>
+                <label for="description">Description:</label>
                 <input type="text" class="" id="description" name="description" value="<?php echo $description; ?>" required>
             </div>
             <div class="">

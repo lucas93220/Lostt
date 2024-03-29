@@ -17,12 +17,13 @@
         <a href="./index.html"><img class="logo" src="./asset/logo.png" alt="logo"></a>
         <nav>
             <ul class="navigation">
-                <li><a href=".">Shop</a></li>
+                <li><a href="../shop.php">Shop</a></li>
                 <li><a href=".">About us</a></li>
                 <li><a href="../update.php">Modifier</a></li>
                 <li><a href="../logout.php">Deconnexion</a></li>
             </ul>
         </nav>
+        
     </header>
     <div class="sucess">
     <h1>Bienvenue <?php echo $_SESSION['PRENOM_USER']; ?>!</h1>

@@ -19,14 +19,7 @@
 <body>
     <header>
         <a href="./index.html"><img class="logo" src="./asset/logo.png" alt="logo"></a>
-        <nav>
-            <ul class="navigation">
-                <li><a href=".">Shop</a></li>
-                <li><a href=".">About us</a></li>
-                <li><a href="connexion.php">Connexion</a></li>
-                <li><a href="register.php">Inscription</a></li>
-            </ul>
-        </nav>
+        <?php include_once("./php/nav.php"); ?>
     </header>
     <main>
             <h2>Connectez-vous</h2> 

@@ -12,17 +12,15 @@ try{
         $ville      = $_POST['VILLE_USER'];
         $adresse    = $_POST['ADRESSE_USER'];
 
-        // On se connecte à MySQL
         $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
         $bdd = new PDO('mysql:host=localhost;dbname=lostt', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',$pdo_options));
         
-        // Verifie si l'utilisateur est déja inscrit
         $sql = "SELECT * FROM user WHERE EMAIL_USER = '$email' ";
         $result = $bdd->prepare($sql);
         $result->execute();
 
 if ($result->rowCount() > 0) {
-    $data = $result->fetch(PDO::FETCH_ASSOC); // Récupère la première ligne de résultat sous forme de tableau associatif
+    $data = $result->fetch(PDO::FETCH_ASSOC); 
 
     if (password_verify($password, $data['MDP_USER'])) {
         echo "<p class=\"success\">Vous êtes déjà inscrit, <a href=\"connexion.php\" title=\"pub\">Connectez vous</a></p>";
