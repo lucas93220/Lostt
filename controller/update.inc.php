@@ -14,6 +14,8 @@ if ($conn) {
             echo '<h5 class="">' . $row['NOM_PRODUIT'] . '</h5>';
             echo '<p class="">Tarif : ' . $row['PRIX_PRODUIT'] . ' €</p>';
             echo '<p class="">Description : ' . $row['DESC_PRODUIT'] . '</p>';
+            echo '<p class="">Quantité restante : ' . $row['QUANTITE_PRODUIT'] . '</p>';
+
             echo '<a href="../admin/edit_produit.php?id=' . $row['ID_PRODUIT'] . '" class="btn btn-primary btn-sm m-1 btn-margin">Modifier</a>';
             echo '<a href="../admin/delete_produit.php?id=' . $row['ID_PRODUIT'] . '" class="btn btn-danger btn-sm m-1 btn-margin">Supprimer</a>';
             echo '</div>';

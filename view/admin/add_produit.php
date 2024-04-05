@@ -50,6 +50,31 @@ include_once("../../controller/add_produit.inc.php"); ?>
                 <label for="image">Image du produit:</label>
                 <input type="file" class="" id="image" name="image" value="<?php echo $image; ?>" required>
             </div>
+<div class="form-group">
+    <label for="quantite-s">Quantité disponible (S):</label>
+    <input type="number" class="form-control" id="quantite-s" name="quantite[S]" value="0" min="0">
+</div>
+<div class="form-group">
+    <label for="quantite-m">Quantité disponible (M):</label>
+    <input type="number" class="form-control" id="quantite-m" name="quantite[M]" value="0" min="0">
+</div>
+<div class="form-group">
+    <label for="quantite-l">Quantité disponible (L):</label>
+    <input type="number" class="form-control" id="quantite-l" name="quantite[L]" value="0" min="0">
+</div>
+<div class="form-group">
+    <label for="quantite-xl">Quantité disponible (XL):</label>
+    <input type="number" class="form-control" id="quantite-xl" name="quantite[XL]" value="0" min="0">
+</div>
+<div class="form-group">
+    <label for="quantite-xxl">Quantité disponible (XXL):</label>
+    <input type="number" class="form-control" id="quantite-xxl" name="quantite[XXL]" value="0" min="0">
+</div>
+<div class="form-group">
+    <label for="quantite-unique">Quantité disponible (Unique):</label>
+    <input type="number" class="form-control" id="quantite-unique" name="quantite[Unique]" value="0" min="0">
+</div>
+
             <button type="submit" class="btn btn-primary">Ajouter</button>
         </form>
 
