@@ -23,7 +23,7 @@ if ($result->rowCount() > 0) {
     $data = $result->fetch(PDO::FETCH_ASSOC); 
 
     if (password_verify($password, $data['MDP_USER'])) {
-        echo "<p class=\"success\">Vous êtes déjà inscrit, <a href=\"connexion.php\" title=\"pub\">Connectez vous</a></p>";
+        echo "<p class=\"success\">Vous êtes déjà inscrit, <a href=\"./view/layout/connexion.php\" title=\"pub\">Connectez vous</a></p>";
         $_SESSION['EMAIL_USER'] = $email;   
     } else {   
         echo "<p class=\"error\">Cette adresse mail est déjà utilisée !!!</p>";
@@ -36,7 +36,7 @@ if ($result->rowCount() > 0) {
             $req = $bdd->prepare($sql);
             $req->execute();
             echo "<p class=\"success\">Inscription effectuée :
-                 <a href=\"connexion.php\" title=\"pub\">Connectez vous</a>
+                 <a href=\"view/layout/connexion.php\" title=\"pub\">Connectez vous</a>
                  </p>";
         }
         $result->closeCursor();

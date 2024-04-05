@@ -1,5 +1,5 @@
 <?php
-    include_once("./php/db.php");
+    include_once("../../controller/db.php");
     if(isset($_SESSION["PRENOM_USER"])){
         header("Location: index.php");
         exit();
@@ -11,20 +11,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/form.css">
+    <!-- <link rel="stylesheet" href="../../public/css/nav.css"> -->
+    <link rel="stylesheet" href="../../public/css/reset.css">
     <title>Connexion</title>
 </head>
 <body>
-    <header>
-        <a href="./index.html"><img class="logo" src="./asset/logo.png" alt="logo"></a>
-        <?php include_once("./php/nav.php"); ?>
-    </header>
+<?php include_once("../../model/nav.user.php"); ?>
     <main>
             <h2>Connectez-vous</h2> 
             <?php
-            include_once "./php/log.inc.php";
+            include_once "../../controller/log.inc.php";
             ?>       
             <form class="connexion" action="" method="post">
             <label for="email">Email:</label> <br>

@@ -1,5 +1,7 @@
 <?php
-include_once ('./php/db.php');
+session_start();
+
+include_once ('../../controller/db.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,10 +13,12 @@ include_once ('./php/db.php');
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+
+    <?php include_once("../../model/nav.admin.php"); ?>
 <div class="container">
     <h1 class="mt-4">Modifier un produit</h1>
     <?php
-    include_once ('./php/edit_produit.inc.php');
+    include_once ('../../controller/edit_produit.inc.php');
     ?>
     <form method="post" action="<?php echo isset($id) ? htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $id) : htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
         <div class="">

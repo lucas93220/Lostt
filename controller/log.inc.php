@@ -22,9 +22,11 @@ try {
             $_SESSION['PRENOM_USER'] = $data['PRENOM_USER'];
             
             if ($data['ROLE_USER'] === 'admin') {
-                header("Location: admin/home.php"); 
+                $_SESSION["isAdmin"] = true;
+                header("Location: ../admin/home.php"); 
             } else {
-                header("Location: index.php"); 
+                $_SESSION["isAdmin"] = false;
+                header("Location: ../layout/account.php"); 
             }
         } else {
             echo "<p class=\"error\">Identifiants Invalides !!!</p>";

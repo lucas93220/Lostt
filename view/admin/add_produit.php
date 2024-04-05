@@ -1,5 +1,6 @@
-<?php include_once("./php/add_produit.inc.php"); ?>
-
+<?php 
+session_start();
+include_once("../../controller/add_produit.inc.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +11,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
+    <?php include_once("../../model/nav.admin.php"); ?>
 <body>
     <div class="container">
         <h1 class="mt-4">Ajouter un produit</h1>
@@ -46,7 +48,7 @@
             </div>
             <div class="">
                 <label for="image">Image du produit:</label>
-                <input type="file" class="" id="image" name="image">
+                <input type="file" class="" id="image" name="image" value="<?php echo $image; ?>" required>
             </div>
             <button type="submit" class="btn btn-primary">Ajouter</button>
         </form>

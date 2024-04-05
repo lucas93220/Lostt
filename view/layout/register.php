@@ -1,9 +1,9 @@
 <?php
     session_start();
-    include_once('./php/db.php');
+    include_once('../../controller/db.php');
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        include_once "./php/register.inc.php";
+        include_once "../../controller/register.inc.php";
     }
     if(isset($_SESSION["PRENOM_USER"])){
         header("Location: index.php");
@@ -21,10 +21,7 @@
     <title>Inscription</title>
 </head>
 <body>
-<header>
-        <a href="./index.html"><img class="logo" src="./asset/logo.png" alt="logo"></a>
-        <?php include_once("./php/nav.php"); ?>
-    </header>
+<?php include_once("../../model/nav.user.php"); ?>
     <main>
         <h2>Inscrivez-vous !</h2>
         <form class="inscription" method="post">
@@ -55,7 +52,7 @@
             <button class="button" type="submit" name="submit">Inscription</button> <br>
         </form>
         <?php
-            include_once "./php/register.inc.php";
+            include_once "../../controller/register.inc.php";
             ?>
     </main>
 

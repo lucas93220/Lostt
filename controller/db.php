@@ -8,6 +8,7 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
-    echo "La connexion à la base de données a échoué: " . $e->getMessage();
+    echo "Erreur de connexion à la base de données : " . $e->getMessage();
+    exit(); // Arrêter le script en cas d'erreur
 }
 ?>

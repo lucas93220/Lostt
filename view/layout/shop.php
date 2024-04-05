@@ -1,6 +1,6 @@
 <?php
   session_start();
-  include_once("./php/db.php");
+  include_once("../../controller/db.php");
   if(!isset($_SESSION["EMAIL_USER"])){
     header("Location: connexion.php");
     exit(); 
@@ -13,10 +13,7 @@
   </head>
   <body>
 
-  <header>
-        <a href="./index.html"><img class="logo" src="./asset/logo.png" alt="logo"></a>
-        <?php include_once("./php/nav.php"); ?>
-    </header>
+  <?php include_once("../../model/nav.user.php"); ?>
 
   </body>
 </html>
