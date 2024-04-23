@@ -11,7 +11,6 @@ if(isset($_GET['id'])) {
         $stmt_produit->execute();
         
         if ($row_produit = $stmt_produit->fetch(PDO::FETCH_ASSOC)) {
-            $product = $row_produit; // Assigner les informations du produit à la variable $product
             
             $sql_tailles = "SELECT * FROM produit WHERE ID_PRODUIT = :produit_id AND (QUANTITE_PRODUIT_S > 0 OR QUANTITE_PRODUIT_M > 0 OR QUANTITE_PRODUIT_L > 0 OR QUANTITE_PRODUIT_XL > 0 OR QUANTITE_PRODUIT_XXL > 0 OR QUANTITE_PRODUIT_U > 0)";
             $stmt_tailles = $conn->prepare($sql_tailles);
