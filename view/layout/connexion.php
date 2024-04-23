@@ -13,6 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="../../public/css/nav.css"> -->
     <link rel="stylesheet" href="../../public/css/reset.css">
+    <script src="../../public/js/app.js" defer></script>
+
     <title>Connexion</title>
 </head>
 <body>

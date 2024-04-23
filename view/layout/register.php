@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/form.css">
+    <script src="../../public/js/app.js" defer></script>
+
     <title>Inscription</title>
 </head>
 <body>

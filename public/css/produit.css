@@ -1,0 +1,10 @@
+
+.tailles-buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.taille-button {
+    margin-right: 10px; /* Ajoute un espace entre chaque bouton */
+    margin-bottom: 10px; /* Ajoute un espacement vertical entre les lignes de boutons */
+}

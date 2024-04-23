@@ -1,17 +1,37 @@
-// Attend que le DOM soit chargé
 document.addEventListener("DOMContentLoaded", function() {
-    // Récupère le lien "Shop"
-    var shopLink = document.getElementById("shop-link");
-    // Récupère la sous-navigation des catégories
-    var categoryNav = document.getElementById("sous-navigation");
+    const panierLink = document.querySelector('a[href="panier.php"]');
+    const panierContent = document.getElementById('panier-content');
 
-    // Affiche la sous-navigation des catégories lorsque la souris survole le lien "Shop"
-    shopLink.addEventListener("mouseenter", function() {
-        categoryNav.style.display = "block";
+    panierLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        togglePanierContent();
     });
 
-    // Masque la sous-navigation des catégories lorsque la souris quitte le lien "Shop"
-    shopLink.addEventListener("mouseleave", function() {
-        categoryNav.style.display = "none";
-    });
+    function togglePanierContent() {
+        if (panierContent.classList.contains('show')) {
+            hidePanierContent();
+        } else {
+            fetchPanierContent();
+        }
+    }
+
+    function fetchPanierContent() {
+       
+        fetch('panier.php')
+            .then(response => response.text())
+            .then(data => {
+                panierContent.innerHTML = data;
+                showPanierContent();
+            })
+            .catch(error => console.error('Erreur lors de la récupération du contenu du panier :', error));
+    }
+
+    function showPanierContent() {
+        panierContent.classList.add('show');
+    }
+
+    function hidePanierContent() {
+        panierContent.classList.remove('show');
+       
+    }
 });

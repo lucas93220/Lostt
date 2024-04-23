@@ -11,6 +11,8 @@ include_once ('../../controller/db.php');
     <title>Modifier un produit</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
+    <script src="../../public/js/app.js" defer></script>
+
 </head>
 <body>
 

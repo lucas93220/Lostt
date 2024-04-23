@@ -27,6 +27,9 @@ include_once ('../../controller/get_categorie.php');
             echo "<li><a href=\"register.php\">Créer un compte</a></li>";
         }
         ?>
+        <li><a href="../layout/panier.php" class="active">Panier</a>
+        <div id="panier-content" class="panier-content"></div>
+        </li>    
     </ul>
 </nav>
 </header>

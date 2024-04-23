@@ -10,6 +10,8 @@
 <html>
   <head>
     <link rel="stylesheet" href="style.css" />
+    <script src="../../public/js/app.js" defer></script>
+
   </head>
   <body>
 
