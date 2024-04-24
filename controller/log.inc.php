@@ -17,16 +17,20 @@ try {
 
         if ($result->rowCount() > 0 && password_verify($password, $data['MDP_USER'])) {
             echo "<p class=\"success\">Vous êtes bien connectés !</p>";
-
-            $_SESSION['EMAIL_USER'] = $email;
+    
+            // Stocker les informations de l'utilisateur dans la session
+            $_SESSION['ID_USER'] = $data['ID_USER']; // Stocker l'ID_USER
+            $_SESSION['EMAIL_USER'] = $email; // Stocker l'email de l'utilisateur
+            $_SESSION['NOM_USER'] = $data['NOM_USER']; // Assurez-vous de définir NOM_USER correctement
             $_SESSION['PRENOM_USER'] = $data['PRENOM_USER'];
-            
+    
+            // Redirection en fonction du rôle de l'utilisateur
             if ($data['ROLE_USER'] === 'admin') {
                 $_SESSION["isAdmin"] = true;
-                header("Location: ../admin/home.php"); 
+                header("Location: ../admin/home.php");
             } else {
                 $_SESSION["isAdmin"] = false;
-                header("Location: ../layout/account.php"); 
+                header("Location: ../layout/account.php");
             }
         } else {
             echo "<p class=\"error\">Identifiants Invalides !!!</p>";
@@ -35,4 +39,5 @@ try {
 } catch (Exception $e) {
     die("Erreur de connexion : " . $e->getMessage());
 }
+
 ?>
