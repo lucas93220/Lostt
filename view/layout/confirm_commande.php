@@ -1,11 +1,9 @@
 <?php
 session_start();
 include_once('../../controller/db.php');
-include_once('panier.php');
+include_once('../../controller/calculPanier.php');
 
-
-
-if(isset($_SESSION['ID_USER'], $_SESSION['NOM_USER'], $_SESSION['PRENOM_USER'], $_SESSION['EMAIL_USER'])) {
+if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] === 'checkout') {
         
@@ -36,12 +34,11 @@ if(isset($_SESSION['ID_USER'], $_SESSION['NOM_USER'], $_SESSION['PRENOM_USER'], 
         
         $stmt->execute();
 
-        unset($_SESSION['cart']);
 
         echo "La commande a été validée avec succès.";
     }
 } else {
-    echo "Erreur: Utilisateur non connecté.";
+    echo "Erreur: Votre panier est vide.";
 }
 
 ?>

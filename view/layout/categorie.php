@@ -21,8 +21,8 @@ if(isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../../public/js/app.js" defer></script>
-
+    <script src="../../public/js/app.js"></script>
+                <script src="../../public/js/op_panier.js"></script>
     <title><?php echo $nom_categorie; ?></title>
 </head>
 <body>

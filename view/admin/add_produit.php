@@ -9,8 +9,8 @@ include_once("../../controller/add_produit.inc.php"); ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter un produit</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="../../public/js/app.js" defer></script>
-
+    <script src="../../public/js/app.js"></script>
+                <script src="../../public/js/op_panier.js"></script>
 </head>
 
     <?php include_once("../../model/nav.admin.php"); ?>

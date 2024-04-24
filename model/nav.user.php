@@ -18,7 +18,7 @@ include_once ('../../controller/get_categorie.php');
         <?php
         if(isset($_SESSION["PRENOM_USER"])) 
         {
-            echo "<li><a href=\"#\">Bienvenue " . $_SESSION["PRENOM_USER"] . " !</a></li>";
+            echo "<li><a href=\"account.php\">Bienvenue " . $_SESSION["PRENOM_USER"] . " !</a></li>";
             echo "<li><a href=\"../../logout.php\">Déconnexion</a></li>";
         } else 
         {

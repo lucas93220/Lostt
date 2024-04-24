@@ -13,6 +13,7 @@ function addToCart(event, productId, productName, productPrice, size) {
     xhr.onload = function() {
         if (xhr.status === 200) {
             alert(xhr.responseText);
+            window.location.reload();
         } else {
             alert('Une erreur s\'est produite lors de l\'ajout au panier. Veuillez réessayer.');
         }
@@ -37,7 +38,7 @@ function supprimerDuPanier(product_id, size) {
         .then(response => response.text())
         .then(data => {
             console.log(data);
-            window.location.reload(); // Recharger la page après la suppression
+            window.location.reload();
         })
         .catch(error => console.error('Erreur lors de la suppression du produit:', error));
     }

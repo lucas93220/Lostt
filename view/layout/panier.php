@@ -2,27 +2,27 @@
 session_start();
 
 include_once('../../controller/db.php');
+include_once('../../controller/calculPanier.php');
 
-function calculerTotalPanier() {
-    $total = 0;
-    foreach ($_SESSION['cart'] as $product) {
-        $total += $product['prix'] * $product['quantite'];
-    }
-    return $total;
-}
+
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['product_id'], $_POST['size'])) {
-    $product_id = $_POST['product_id'];
-    $size = $_POST['size'];
+    if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+        $product_id = $_POST['product_id'];
+        $size = $_POST['size'];
 
-    foreach ($_SESSION['cart'] as $key => $product) {
-        if ($product['product_id'] === $product_id && $product['size'] === $size) {
-            unset($_SESSION['cart'][$key]);
-            echo "Le produit a été supprimé du panier avec succès.";
-            exit;
+        foreach ($_SESSION['cart'] as $key => $product) {
+            if ($product['product_id'] === $product_id && $product['size'] === $size) {
+                unset($_SESSION['cart'][$key]);
+                echo "Le produit a été supprimé du panier avec succès.";
+                exit;
+            }
         }
+        echo "Erreur: Produit non trouvé dans le panier.";
+    } else {
+        echo "Erreur: Le panier est vide.";
     }
-    echo "Erreur: Produit non trouvé dans le panier.";
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] === 'add' && isset($_POST['product_id'], $_POST['size'])) {
@@ -60,8 +60,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
 }
 
 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+    // Le panier existe et n'est pas vide, vous pouvez accéder à $_SESSION['cart']
     $panierVide = true;
-    echo "<h2>Contenu du panier :</h2>";
     foreach ($_SESSION['cart'] as $product) {
         if (is_array($product) && isset($product['product_id'], $product['size'], $product['nom'], $product['prix'])) {
             $panierVide = false;
@@ -78,10 +78,14 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         echo "<p>Votre panier est vide.</p>";
     } else {
         echo "<p>Total du panier : " . calculerTotalPanier() . " €</p>";
-        echo '<form method="post" action="confirm_commande.php">
+        if(isset($_SESSION['ID_USER'])) {
+            echo '<form method="post" action="confirm_commande.php">
                 <input type="hidden" name="action" value="checkout">
                 <button type="submit">Valider la commande</button>
               </form>';
+        } else {
+            echo '<a href="invite.php">Valider la commande en tant qu\'invité</a>';
+        }
     }
 } else {
     echo "<p>Votre panier est vide.</p>";

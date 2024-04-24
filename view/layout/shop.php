@@ -10,8 +10,8 @@
 <html>
   <head>
     <link rel="stylesheet" href="style.css" />
-    <script src="../../public/js/app.js" defer></script>
-
+    <script src="../../public/js/app.js"></script>
+                <script src="../../public/js/op_panier.js"></script>
   </head>
   <body>
 
