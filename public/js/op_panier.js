@@ -12,14 +12,14 @@ function addToCart(event, productId, productName, productPrice, size) {
     xhr.open('POST', 'panier.php', true);
     xhr.onload = function() {
         if (xhr.status === 200) {
-            alert(xhr.responseText);
-            window.location.reload();
+            console.log(xhr.responseText);
+            window.location.reload(); 
         } else {
-            alert('Une erreur s\'est produite lors de l\'ajout au panier. Veuillez réessayer.');
+            console.error('Une erreur s\'est produite lors de l\'ajout au panier. Veuillez réessayer.');
         }
     };
     xhr.onerror = function() {
-        alert('Une erreur s\'est produite lors de l\'ajout au panier. Veuillez réessayer.');
+        console.error('Une erreur s\'est produite lors de l\'ajout au panier. Veuillez réessayer.');
     };
     xhr.send(formData);
 }
@@ -43,3 +43,25 @@ function supprimerDuPanier(product_id, size) {
         .catch(error => console.error('Erreur lors de la suppression du produit:', error));
     }
 }
+
+function changerQuantite(product_id, size, newQuantity) {
+    const formData = new FormData();
+    formData.append('action', 'update_quantity');
+    formData.append('product_id', product_id);
+    formData.append('size', size);
+    formData.append('quantity', newQuantity);
+
+    fetch('panier.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+        window.location.reload();
+    })
+    .catch(error => console.error('Erreur lors de la mise à jour de la quantité du produit:', error));
+}
+
+
+
