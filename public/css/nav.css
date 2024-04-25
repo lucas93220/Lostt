@@ -1,4 +1,4 @@
-/* 
+
   
   header {
     display: flex;
@@ -39,11 +39,10 @@
   
   .navigation li,
   .sous-navigation li {
-    margin: 0 15px; /* Réduisez les marges pour un meilleur espacement
-   } */
+    margin: 0 15px; 
+   } 
    
 
-  /* Styles pour le contenu du panier */
 .panier-content {
     display: none; /* Par défaut, cachez le contenu du panier */
     position: absolute;
@@ -59,4 +58,4 @@
     display: block; /* Affichez le contenu du panier lorsque la classe 'show' est présente */
 }
 
-  
+   

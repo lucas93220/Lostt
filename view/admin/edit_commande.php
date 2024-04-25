@@ -14,7 +14,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'valider' && isset($_GET['comm
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':commandeId', $commandeId);
     $stmt->execute();
-    header("Location: home.php"); // Redirection vers home.php après validation de la commande
+    header("Location: home.php");
     exit();
 }
 
@@ -25,7 +25,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'annuler' && isset($_GET['comm
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':commandeId', $commandeId);
     $stmt->execute();
-    header("Location: home.php"); // Redirection vers home.php après annulation de la commande
+    header("Location: home.php"); 
     exit();
 }
 

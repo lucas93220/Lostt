@@ -16,7 +16,6 @@ if (isset($_GET["id"])) {
             $description = $_POST["description"];
             $categorie = $_POST['categorie'];
 
-            // Gestion des quantités pour chaque taille
             $quantites = $_POST['quantite'];
             $quantite_total = array_sum($quantites);
 
@@ -24,13 +23,11 @@ if (isset($_GET["id"])) {
                 $image_name = $_FILES['image']['name'];
                 $image_tmp_name = $_FILES['image']['tmp_name'];
 
-                // Assurez-vous que le répertoire "uploads" existe
-                $uploadDirectory = __DIR__ . '/../uploads/';
+                $uploadDirectory ='../../uploads/';
                 if (!is_dir($uploadDirectory)) {
-                    mkdir($uploadDirectory, 0777, true); // Crée le répertoire s'il n'existe pas
+                    mkdir($uploadDirectory, 0777, true);
                 }
 
-                // Générez un nom de fichier unique pour éviter les conflits
                 $targetFile = $uploadDirectory . uniqid() . '_' . basename($image_name);
 
                 if (move_uploaded_file($image_tmp_name, $targetFile)) {

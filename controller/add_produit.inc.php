@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $image_tmp_name = $_FILES['image']['tmp_name'];
             $image_type = $_FILES['image']['type'];
 
-            $uploadDirectory = __DIR__ . '/../uploads/';
+            $uploadDirectory ='../../uploads/';
             if (!is_dir($uploadDirectory)) {
                 mkdir($uploadDirectory, 0777, true);
             }
