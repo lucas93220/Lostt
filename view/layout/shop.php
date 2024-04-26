@@ -1,25 +1,21 @@
 <?php
 session_start();
-include_once("../../controller/db.php");
-if(!isset($_SESSION["EMAIL_USER"])){
-  header("Location: connexion.php");
-  exit(); 
-}
+include_once("../../controller/db.php")
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="../../public/css/reset.css"/>
-  <link rel="stylesheet" href="../../public/css/nav.css"/>
-
+<link rel="stylesheet" href="../../public/css/reset.css"/>
+<link rel="stylesheet" href="../../public/css/nav.css"/>
+<link rel="stylesheet" href="../../public/css/shop.css"/>
   <script src="../../public/js/app.js"></script>
   <script src="../../public/js/op_panier.js"></script>
 </head>
 <body>
 
 <?php include_once("../../model/nav.user.php"); ?>
-<h2>Shop</h2>
-<div class="articles">
+<h1>Shop</h1>
+<main class="container">
   <?php
   if ($conn) {
     $sql_articles = "SELECT * FROM produit";
@@ -29,17 +25,25 @@ if(!isset($_SESSION["EMAIL_USER"])){
     while ($row_article = $stmt_articles->fetch(PDO::FETCH_ASSOC)) {
       ?>
       <div class="article">
-        <h2><a href="details_produit.php?id=<?php echo $row_article['ID_PRODUIT']; ?>"><?php echo $row_article['NOM_PRODUIT']; ?></h2>
+      <h2><a href="details_produit.php?id=<?php echo $row_article['ID_PRODUIT']; ?>"></h2>
         <img src="<?php echo $row_article['IMAGE_PRODUIT']; ?>" alt="<?php echo $row_article['NOM_PRODUIT']; ?>">
-        <p>Prix: <?php echo $row_article['PRIX_PRODUIT']; ?> €</p>
-        <p>Description: <?php echo $row_article['DESC_PRODUIT']; ?></p>
-      </div>
+        <p><?php echo $row_article['NOM_PRODUIT']; ?></p>
+        <p><?php echo $row_article['PRIX_PRODUIT']; ?> EUR</p>
+      </div></a>
+      
+      
       <?php
     }
   } else {
     echo "Impossible de récupérer les articles : La connexion à la base de données a échoué.";
   }
   ?>
-</div>
+
+</main>
+<footer>
+        <p>
+            Lostt - 2024
+        </p>
+    </footer>
 </body>
 </html>

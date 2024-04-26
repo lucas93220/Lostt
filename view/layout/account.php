@@ -9,9 +9,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../../public/css/reset.css"/>
+<link rel="stylesheet" href="../../public/css/nav.css"/>
     <script src="../../public/js/app.js"></script>
-                <script src="../../public/js/op_panier.js"></script>
+    <script src="../../public/js/op_panier.js"></script>
   </head>
   <body>
 

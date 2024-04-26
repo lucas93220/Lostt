@@ -2,7 +2,7 @@
 include_once ('../../controller/get_categorie.php');
 ?>
 <header>
-<a href="../../index.php"><img class="logo" src="./asset/logo.png" alt="logo"></a>
+<a href="../view/index/index.php"><img class="logo" src="./asset/logo.png" alt="LOSTT"></a>
 <nav>
     <ul class="navigation">
         <li><a id="shop-link" href="../layout/shop.php">Shop</a>

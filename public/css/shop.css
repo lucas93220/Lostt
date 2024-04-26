@@ -1,0 +1,29 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+
+    margin: auto; 
+  }
+  
+  h1 {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .article {
+    max-width: 100%;
+  }
+  
+  .article h2 {
+    margin-top: 0;
+  }
+  
+  .article p{
+    color: black;
+  }
+  .article img {
+    max-width: 100%;
+    height: auto;
+  }
+  

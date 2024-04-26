@@ -1,61 +1,61 @@
-
-  
-  header {
-    display: flex;
-    padding: 10px;
-    background-color: var(--background);
-    color: var(--text-color);
-    justify-content: space-between;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.50), -2px 9px 20px 9px rgba(0,0,0,0.50);
-  }
-  
-  .logo {
-    height: 50px;
-  }
-  
-  nav {
-    display: flex;
-    align-items: center;
-  }
-  
-  nav a {
-    font-size: 2.6rem;
-    font-family: var(--font-family);
-    color: var(--text-color);
-    text-decoration: none;
-    padding: var(--nav-link-padding);
-    transition-duration: 0.4s;
-  }
-  
-  nav a:hover {
-    color: var(--hover-color);
-  }
-  
-  .navigation,
-  .sous-navigation {
-    display: flex;
-    align-items: center;
-  }
-  
-  .navigation li,
-  .sous-navigation li {
-    margin: 0 15px; 
-   } 
-   
-
-.panier-content {
-    display: none; /* Par défaut, cachez le contenu du panier */
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 10px;
-    z-index: 999;
+header {
+  background-color: #ffffff;
+  border: solid 1px black;
+  color: #fff;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
 }
 
-.panier-content.show {
-    display: block; /* Affichez le contenu du panier lorsque la classe 'show' est présente */
+.logo {
+  width: 100px;
+  height: auto;
+  display: inline-block;
 }
 
-   
+nav {
+  display: inline-block;
+}
+
+.navigation {
+  list-style-type: none;
+}
+
+.navigation li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.navigation li a {
+  color: #000000;
+  text-decoration: none;
+  padding: 30px;
+  transition: color 0.3s;
+}
+
+.navigation li a:hover {
+  color: #000000;
+}
+
+.sous-navigation {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  padding: 10px;
+}
+
+.navigation li:hover .sous-navigation {
+  display: block;
+}
+
+.sous-navigation li {
+  display: block;
+}
+
+.sous-navigation li a {
+  color: #000000;
+  text-decoration: none;
+  padding: 5px 0;
+}
+
+

@@ -7,6 +7,8 @@ include_once("edit_commande.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../public/css/reset.css"/>
+<link rel="stylesheet" href="../../public/css/nav.css"/>
     <script src="../../public/js/app.js"></script>
                 <script src="../../public/js/op_panier.js"></script>
     <title>Liste des Commandes</title>
@@ -21,7 +23,6 @@ include_once("edit_commande.php");
         echo "<ul>";
         foreach ($commandes as $commande) {
           echo "<p>ID Commande : " . $commande['ID_COMMANDE'] . "</p>";
-          echo "<p>ID Utilisateur : " . $commande['ID_USER'] . "</p>";
           echo "<p>Nom : " . $commande['NOM_USER'] . "</p>";
           echo "<p>Prenom : " . $commande['PRENOM_USER'] . "</p>";
           echo "<p>Date de commande : " . $commande['DATE_COMMANDE'] . "</p>";

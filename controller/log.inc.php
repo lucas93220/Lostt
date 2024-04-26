@@ -18,13 +18,11 @@ try {
         if ($result->rowCount() > 0 && password_verify($password, $data['MDP_USER'])) {
             echo "<p class=\"success\">Vous êtes bien connectés !</p>";
     
-            // Stocker les informations de l'utilisateur dans la session
-            $_SESSION['ID_USER'] = $data['ID_USER']; // Stocker l'ID_USER
-            $_SESSION['EMAIL_USER'] = $email; // Stocker l'email de l'utilisateur
-            $_SESSION['NOM_USER'] = $data['NOM_USER']; // Assurez-vous de définir NOM_USER correctement
+            $_SESSION['ID_USER'] = $data['ID_USER'];
+            $_SESSION['EMAIL_USER'] = $email; 
+            $_SESSION['NOM_USER'] = $data['NOM_USER']; 
             $_SESSION['PRENOM_USER'] = $data['PRENOM_USER'];
     
-            // Redirection en fonction du rôle de l'utilisateur
             if ($data['ROLE_USER'] === 'admin') {
                 $_SESSION["isAdmin"] = true;
                 header("Location: ../admin/home.php");

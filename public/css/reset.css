@@ -1,7 +1,6 @@
 *{
     box-sizing: border-box;
 }
-
 html{ 
     font-size: 62.5%;
     font-family: 'Oswald', sans-serif;
@@ -23,5 +22,13 @@ h1,h2,h3,h4{
 }
 a{
     text-decoration: none;
-    
 }
+
+footer{
+    text-align: center;
+    padding: 2rem;
+}
+
+
+
+  

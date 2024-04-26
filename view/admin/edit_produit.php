@@ -9,9 +9,8 @@ include_once ('../../controller/db.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier un produit</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
-    <script src="../../public/js/app.js"></script>
+    <link rel="stylesheet" href="../../public/css/reset.css"/>
+<link rel="stylesheet" href="../../public/css/nav.css"/>    <script src="../../public/js/app.js"></script>
                 <script src="../../public/js/op_panier.js"></script>
 </head>
 <body>

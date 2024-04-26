@@ -11,25 +11,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../../public/css/nav.css"> -->
-    <link rel="stylesheet" href="../../public/css/reset.css">
+    <link rel="stylesheet" href="../../public/css/reset.css"/>
+<link rel="stylesheet" href="../../public/css/nav.css"/>
+<link rel="stylesheet" href="../../public/css/form.css"/>
+
     <script src="../../public/js/app.js"></script>
                 <script src="../../public/js/op_panier.js"></script>
     <title>Connexion</title>
 </head>
 <body>
 <?php include_once("../../model/nav.user.php"); ?>
-    <main>
-            <h2>Connectez-vous</h2> 
+    <main class="connexion">
+            <h2>Connexion</h2> 
             <?php
             include_once "../../controller/log.inc.php";
             ?>       
             <form class="connexion" action="" method="post">
-            <label for="email">Email:</label> <br>
-            <input type="text" id="email" name="EMAIL_USER" required>
+            <input placeholder="Email" type="text" id="email" name="EMAIL_USER" required>
             <br>
-            <label for="password">Mot de passe:</label> <br>
-            <input type="password" id="password" name="MDP_USER" required> <br>
+            <input placeholder="Mot de passe" type="password" id="password" name="MDP_USER" required>
             <p class="pswForget"><a href=".">Mot de passe oublie ?</a></p>
             <br>
             <button  class="button" type="submit">Connexion</button>

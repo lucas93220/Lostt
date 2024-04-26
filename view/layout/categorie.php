@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(isset($_GET['id'])) {
     $categorie_id = $_GET['id'];
 
@@ -21,6 +22,9 @@ if(isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../public/css/reset.css"/>
+<link rel="stylesheet" href="../../public/css/nav.css"/>
+<link rel="stylesheet" href="../../public/css/shop.css"/>
     <script src="../../public/js/app.js"></script>
                 <script src="../../public/js/op_panier.js"></script>
     <title><?php echo $nom_categorie; ?></title>
@@ -28,8 +32,8 @@ if(isset($_GET['id'])) {
 <body>
 <?php include_once("../../model/nav.user.php"); ?>
 
-    <h2><?php echo $nom_categorie; ?></h2>
-    <div class="articles">
+    <h1><?php echo $nom_categorie; ?></h1>
+    <main class="container">
         <?php
         if ($conn) {
             $sql_articles = "SELECT * FROM produit WHERE ID_CATEGORIE = :categorie_id";
@@ -40,18 +44,17 @@ if(isset($_GET['id'])) {
             while ($row_article = $stmt_articles->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                 <div class="article">
-                    <h2><a href="details_produit.php?id=<?php echo $row_article['ID_PRODUIT']; ?>"><?php echo $row_article['NOM_PRODUIT']; ?></h2>
+                <h2><a href="details_produit.php?id=<?php echo $row_article['ID_PRODUIT']; ?>"><?php echo $row_article['NOM_PRODUIT']; ?></h2>
                     <img src="<?php echo $row_article['IMAGE_PRODUIT']; ?>" alt="<?php echo $row_article['NOM_PRODUIT']; ?>">
                     <p>Prix: <?php echo $row_article['PRIX_PRODUIT']; ?> €</p>
-                    <p>Description: <?php echo $row_article['DESC_PRODUIT']; ?></p>
-                </div>
+                </div></a>
                 <?php
             }
         } else {
             echo "Impossible de récupérer les articles : La connexion à la base de données a échoué.";
         }
         ?>
-    </div>
+    </main>
 </body>
 </html>
 

@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+}
+main p{
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+.connexion{
+    margin: 8rem auto;
+}
+
+form {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"],
+input[type="password"]{
+    padding: 13px;
+    margin-bottom: 16px;
+    border: 1px solid #000000;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus{
+    outline: none;
+}
+
+button {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 12px 20px;
+    border: solid 1px black;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #777;
+}
