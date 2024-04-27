@@ -33,8 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $quantite_totale = array_sum($quantites);
 
-                $sql = "INSERT INTO produit (NOM_PRODUIT, PRIX_PRODUIT, IMAGE_PRODUIT, DESC_PRODUIT, ID_CATEGORIE, QUANTITE_PRODUIT_S, QUANTITE_PRODUIT_M, QUANTITE_PRODUIT_L, QUANTITE_PRODUIT_XL, QUANTITE_PRODUIT_XXL, QUANTITE_PRODUIT_U, QUANTITE_PRODUIT) 
-                        VALUES (:nom, :prix, :image, :description, :categorie, :quantite_s, :quantite_m, :quantite_l, :quantite_xl, :quantite_xxl, :quantite_u, :quantite_totale)";
+                $sql = "INSERT INTO produit (NOM_PRODUIT, PRIX_PRODUIT, IMAGE_PRODUIT, DESC_PRODUIT, ID_CATEGORIE, QUANTITE_PRODUIT_S, QUANTITE_PRODUIT_M, QUANTITE_PRODUIT_L, QUANTITE_PRODUIT_XL, QUANTITE_PRODUIT_XXL, QUANTITE_PRODUIT_U) 
+        VALUES (:nom, :prix, :image, :description, :categorie, :quantite_s, :quantite_m, :quantite_l, :quantite_xl, :quantite_xxl, :quantite_u)";
+
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':nom', $nom);
                 $stmt->bindParam(':prix', $prix);
@@ -47,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bindParam(':quantite_xl', $quantites['XL']);
                 $stmt->bindParam(':quantite_xxl', $quantites['XXL']);
                 $stmt->bindParam(':quantite_u', $quantites['Unique']);
-                $stmt->bindParam(':quantite_totale', $quantite_totale);
 
                 if ($stmt->execute()) {
                     echo "Article ajouté avec succès.";
