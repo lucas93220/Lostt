@@ -20,7 +20,7 @@ h2 {
     color: #333;
 }
 .connexion{
-    margin: 8rem auto;
+    margin-top: 8rem;
 }
 
 form {
@@ -42,15 +42,21 @@ input[type="password"]:focus{
 }
 
 button {
-    background-color: #ffffff;
+    display: inline-block;
+    padding: 15px 20px;
+    background-color: white;
     color: #000000;
-    padding: 12px 20px;
-    border: solid 1px black;
-    cursor: pointer;
-    font-size: 2rem;
+    border: solid 2px black;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
 }
 
-
+button:hover{
+    background-color: #000000;
+    color: white;
+    transition: 550ms;
+}
 
 footer {
     text-align: center;

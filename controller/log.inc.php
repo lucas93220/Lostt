@@ -24,11 +24,10 @@ try {
             $_SESSION['PRENOM_USER'] = $data['PRENOM_USER'];
     
             if ($data['ROLE_USER'] === 'admin') {
-                $_SESSION["isAdmin"] = true;
-                header("Location: ../admin/home.php");
+                $_SESSION['ROLE'] = 'admin';
+                header("Location: home.php");
             } else {
-                $_SESSION["isAdmin"] = false;
-                header("Location: ../layout/account.php");
+                header("Location: account.php");
             }
         } else {
             echo "<p class=\"error\">Identifiants Invalides !!!</p>";
@@ -37,5 +36,6 @@ try {
 } catch (Exception $e) {
     die("Erreur de connexion : " . $e->getMessage());
 }
+
 
 ?>

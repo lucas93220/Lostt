@@ -2,7 +2,7 @@
 include_once ('../../controller/get_categorie.php');
 ?>
 <header>
-<a href="./index/index.php"><img class="logo" src="./asset/logo.png" alt="LOSTT"></a>
+<a href="."><img class="logo" src="./asset/logo.png" alt="LOSTT"></a>
 <nav>
     <ul class="navigation">
         <li><a id="shop-link" href="../layout/shop.php">Shop</a>
@@ -14,11 +14,11 @@ include_once ('../../controller/get_categorie.php');
                 ?>
             </ul>
         </li>
-        <li><a href=".">About us</a></li>
+        <li><a href="">About us</a></li>
         <?php
         if(isset($_SESSION["PRENOM_USER"])) 
         {
-            echo "<li><a href=\"account.php\">Bienvenue " . $_SESSION["PRENOM_USER"] . " !</a></li>";
+            echo "<li><a href=\"account.php\">" . $_SESSION["PRENOM_USER"] . "</a></li>";
             echo "<li><a href=\"../../logout.php\">Déconnexion</a></li>";
         } else 
         {

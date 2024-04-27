@@ -2,8 +2,8 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 10px;
-
     margin: auto; 
+    padding: 3rem;
   }
   
   h1 {
@@ -21,6 +21,7 @@
   
   .article p{
     color: black;
+    padding: 0.5rem;
   }
   .article img {
     max-width: 100%;

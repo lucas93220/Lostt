@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once('../../controller/db.php');
-include_once('../../controller/calculPanier.php');
+include_once('../controller/db.php');
+include_once('../controller/calculPanier.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nom = $_POST['nom'];
@@ -49,16 +49,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../../public/js/app.js"></script>
-    <script src="../../public/js/op_panier.js"></script>
+    <script src="../public/js/app.js"></script>
+    <script src="../public/js/op_panier.js"></script>
     <title>Commande en tant qu'invité</title>
 </head>
 <body>
-<?php include_once("../../model/nav.user.php"); ?>
+<?php include_once("../model/nav.php"); ?>
 
 <h2>Commande en tant qu'invité</h2>
 <?php
-// Affichage du contenu du panier
 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     $panierVide = true;
     foreach ($_SESSION['cart'] as $product) {

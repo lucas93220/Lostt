@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['ID_USER'], $_SESSION['EMAIL_USER'], $_SESSION['NOM_USER'], $_SESSION['PRENOM_USER'], $_SESSION['isAdmin']) || $_SESSION['isAdmin'] !== true) {
-    header("Location: ../login.php");
-    exit();
-}
-include_once('../../controller/db.php');
+// if (!isset($_SESSION['ID_USER'], $_SESSION['EMAIL_USER'], $_SESSION['NOM_USER'], $_SESSION['PRENOM_USER'], $_SESSION['isAdmin']) || $_SESSION['isAdmin'] !== true) {
+//     header("Location: ../login.php");
+//     exit();
+// }
+include_once('../controller/db.php');
 
 if (isset($_GET['action']) && $_GET['action'] === 'valider' && isset($_GET['commande_id'])) {
     $commandeId = $_GET['commande_id'];

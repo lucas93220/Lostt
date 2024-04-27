@@ -1,0 +1,46 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    padding: 2rem;
+    text-align: center;
+}
+
+input[type="text"],
+select,
+input[type="number"],
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    border: 1px solid black;
+}
+
+.img-produit {
+    max-width: 100%;
+    margin-top: 10px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 20px;
+    background-color: white;
+    color: #000000;
+    border: solid 2px black;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #000000;
+    color: white;
+    transition: 550ms;
+
+}
+

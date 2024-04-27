@@ -1,24 +1,27 @@
 <?php
-    include_once("../../controller/details.inc.php");
+    include_once("../controller/details.inc.php");
     ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../public/css/reset.css"/>
-    <link rel="stylesheet" href="../../public/css/nav.css"/>
+    <link rel="stylesheet" href="../public/css/reset.css"/>
+    <link rel="stylesheet" href="../public/css/nav.css"/>
+    <link rel="stylesheet" href="../public/css/produit.css"/>
     <title><?php echo $row_produit['NOM_PRODUIT']; ?></title>
-    <script src="../../public/js/app.js"></script>
-    <script src="../../public/js/op_panier.js"></script>
+    <script src="../public/js/app.js"></script>
+    <script src="../public/js/op_panier.js"></script>
 </head>
 <body>
-    <?php include_once("../../model/nav.user.php"); ?>
+    <?php include_once("../model/nav.php"); ?>
+    <main>
+    <img class="img-produit" src="<?php echo $row_produit['IMAGE_PRODUIT']; ?>" alt="<?php echo $row_produit['NOM_PRODUIT']; ?>">
+    <aside>
     <h2><?php echo $row_produit['NOM_PRODUIT']; ?></h2>
-    <img src="<?php echo $row_produit['IMAGE_PRODUIT']; ?>" alt="<?php echo $row_produit['NOM_PRODUIT']; ?>">
-    <p>Prix: <?php echo $row_produit['PRIX_PRODUIT']; ?> €</p>
-    <p>Description: <?php echo $row_produit['DESC_PRODUIT']; ?></p>
-    <h3>Tailles disponibles :</h3>
+    <p><?php echo $row_produit['PRIX_PRODUIT']; ?> EUR</p>
+    <p><?php echo $row_produit['DESC_PRODUIT']; ?></p>
+    <h3>Tailles:</h3>
     <div class="tailles-buttons">
         <?php foreach ($tailles_disponibles as $taille_produit) : ?>
             <?php foreach ($taille_produit as $key => $value) : ?>
@@ -38,5 +41,12 @@
             <?php endforeach; ?>
         <?php endforeach; ?>
     </div>
+    </aside>
+    </main>
+    <footer>
+        <p>
+            Lostt - 2024
+        </p>
+    </footer>
 </body>
 </html>

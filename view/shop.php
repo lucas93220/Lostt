@@ -1,19 +1,19 @@
 <?php
 session_start();
-include_once("../../controller/db.php")
+include_once("../controller/db.php")
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="../../public/css/reset.css"/>
-<link rel="stylesheet" href="../../public/css/nav.css"/>
-<link rel="stylesheet" href="../../public/css/shop.css"/>
-  <script src="../../public/js/app.js"></script>
-  <script src="../../public/js/op_panier.js"></script>
+<link rel="stylesheet" href="../public/css/reset.css"/>
+<link rel="stylesheet" href="../public/css/nav.css"/>
+<link rel="stylesheet" href="../public/css/shop.css"/>
+  <script src="../public/js/app.js"></script>
+  <script src="../public/js/op_panier.js"></script>
 </head>
 <body>
 
-<?php include_once("../../model/nav.user.php"); ?>
+<?php include_once("../model/nav.php"); ?>
 <h1>Shop</h1>
 <main class="container">
   <?php

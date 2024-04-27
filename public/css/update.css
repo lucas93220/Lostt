@@ -1,0 +1,87 @@
+main{
+    padding: 3rem;
+}
+.container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+
+    margin: 2rem auto; 
+  }
+  
+  h1 {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .card {
+    max-width: 100%;
+  }
+  
+  .card h2 {
+    margin-top: 0;
+  }
+  
+  .card p{
+    color: black;
+    padding: 0.5rem;
+  }
+  .card img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+
+  .addButton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: white;
+    color: #000000;
+    border: solid 2px black;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 550ms;
+}
+
+.addButton:hover {
+    background-color: #000000;
+    color: white;
+}
+
+
+.editButton,
+.deleteButton {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    transition: 550ms;
+}
+
+.editButton {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+}
+
+.deleteButton {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    color: black;
+}
+
+.editButton:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.deleteButton:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+    color: #ffffff;
+}
+

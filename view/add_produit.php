@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once("../../controller/add_produit.inc.php"); ?>
+include_once("../controller/add_produit.inc.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,27 +8,28 @@ include_once("../../controller/add_produit.inc.php"); ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter un produit</title>
-    <link rel="stylesheet" href="../../public/css/reset.css"/>
-<link rel="stylesheet" href="../../public/css/nav.css"/>
-    <script src="../../public/js/app.js"></script>
-                <script src="../../public/js/op_panier.js"></script>
+    <link rel="stylesheet" href="../public/css/reset.css"/>
+<link rel="stylesheet" href="../public/css/nav.css"/>
+<link rel="stylesheet" href="../public/css/edit.css"/>    
+
+    <script src="../public/js/app.js"></script>
+                <script src="../public/js/op_panier.js"></script>
 </head>
 
-    <?php include_once("../../model/nav.admin.php"); ?>
 <body>
+<?php include_once("../model/nav.php"); ?>
+
+<h1>Ajouter un produit</h1>
     <div class="container">
-        <h1 class="mt-4">Ajouter un produit</h1>
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
             <div class="">
-                <label for="nom">Nom du produit</label>
-                <input type="text" class="" id="nom" name="nom" value="<?php echo $nom; ?>" required>
+                <input placeholder="Nom" type="text" class="" id="nom" name="nom" value="<?php echo $nom; ?>" required>
             </div>
 
             <div class="">
-    <label for="categorie">Catégorie :</label>
-    <select class="" id="categorie" name="categorie" required>
-        <option value="">Sélectionnez une catégorie</option>
+    <select placeholder="Catégorie" id="categorie" name="categorie" required>
+        <option value="">Catégorie</option>
         <?php
         $result_categories = $conn->query("SELECT * FROM categorie");
         if ($result_categories->rowCount() > 0) {
@@ -40,19 +41,15 @@ include_once("../../controller/add_produit.inc.php"); ?>
         ?>
     </select>
 </div>
-
-            <div class="">
-                <label for="tarif">Tarif (en €):</label>
-                <input type="text" class="" id="prix" name="prix" value="<?php echo $prix; ?>" required>
-            </div>
-            <div class="">
-                <label for="description">Description:</label>
-                <input type="text" class="" id="description" name="description" value="<?php echo $description; ?>" required>
-            </div>
-            <div class="">
-                <label for="image">Image du produit:</label>
-                <input type="file" class="" id="image" name="image" value="<?php echo $image; ?>" required>
-            </div>
+<div class="">
+<input placeholder="Prix" type="text" class="" id="prix" name="prix" value="<?php echo $prix; ?>" required>
+ </div>
+<div class="">
+   <input placeholder="Description" type="text" class="" id="description" name="description" value="<?php echo $description; ?>" required>
+ </div>
+<div class="">
+     <input type="file" class="img-produit" id="image" name="image" value="<?php echo $image; ?>" required>
+ </div>
 <div class="form-group">
     <label for="quantite-s">Quantité disponible (S):</label>
     <input type="number" class="form-control" id="quantite-s" name="quantite[S]" value="0" min="0">

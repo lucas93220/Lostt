@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-include_once('../../controller/db.php');
-include_once('../../controller/calculPanier.php');
+include_once('../controller/db.php');
+include_once('../controller/calculPanier.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['product_id'], $_POST['size'])) {
     if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
         $product_already_in_cart = false;
         foreach ($_SESSION['cart'] as &$cart_product) {
             if ($cart_product['product_id'] === $product_id && $cart_product['size'] === $size) {
-                $cart_product['quantite'] += 1; // Augmenter la quantité du produit dans le panier
+                $cart_product['quantite'] += 1;
                 $product_already_in_cart = true;
                 break;
             }
@@ -50,8 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
                 'quantite' => 1
             );
         }
-
-        // Mettre à jour la quantité du produit dans la base de données
         $sql_update_quantity = "UPDATE produit SET QUANTITE_PRODUIT = QUANTITE_PRODUIT + 1 WHERE ID_PRODUIT = :product_id";
         $stmt_update_quantity = $conn->prepare($sql_update_quantity);
         $stmt_update_quantity->bindParam(':product_id', $product_id);

@@ -1,26 +1,26 @@
 <?php
   session_start();
-  include_once("../../controller/db.php");
+  include_once("../controller/db.php");
   if(!isset($_SESSION["EMAIL_USER"])){
-    header("Location: view/layout/connexion.php");
+    header("Location: view/connexion.php");
     exit(); 
   }
 ?>
 <!DOCTYPE html>
 <html>
   <head>
-  <link rel="stylesheet" href="../../public/css/reset.css"/>
-<link rel="stylesheet" href="../../public/css/nav.css"/>
-    <script src="../../public/js/app.js"></script>
-    <script src="../../public/js/op_panier.js"></script>
+  <link rel="stylesheet" href="../public/css/reset.css"/>
+<link rel="stylesheet" href="../public/css/nav.css"/>
+<link rel="stylesheet" href="../public/css/account.css"/>
+
+    <script src="../public/js/app.js"></script>
+    <script src="../public/js/op_panier.js"></script>
   </head>
   <body>
 
-  <?php include_once("../../model/nav.user.php"); ?>
-    <div class="sucess">
-       
-      <h1>Bienvenue <?php echo $_SESSION['PRENOM_USER']; ?>!</h1>
-      <p>C'est votre espace utilisateur.</p>
+  <?php include_once("../model/nav.php"); ?>
+  <h1>Commandes</h1>
+        <div class="sucess">
 
       <?php
 
@@ -34,7 +34,6 @@ if(isset($_SESSION['ID_USER'])) {
     $commandes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     if($commandes) {
-        echo "<h2>Historique des commandes :</h2>";
         foreach($commandes as $commande) {
             echo "<p>ID Commande : " . $commande['ID_COMMANDE'] . "</p>";
             echo "<p>Date de commande : " . $commande['DATE_COMMANDE'] . "</p>";
@@ -52,5 +51,10 @@ if(isset($_SESSION['ID_USER'])) {
 ?>
 
     </div>
+    <footer>
+        <p>
+            Lostt - 2024
+        </p>
+    </footer>
   </body>
 </html>

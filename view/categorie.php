@@ -3,7 +3,7 @@ session_start();
 if(isset($_GET['id'])) {
     $categorie_id = $_GET['id'];
 
-    include_once('../../controller/db.php'); 
+    include_once('../controller/db.php'); 
 
     if ($conn) {
         $sql_categorie = "SELECT NOM_CATEGORIE FROM categorie WHERE ID_CATEGORIE = :categorie_id";
@@ -22,15 +22,15 @@ if(isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../public/css/reset.css"/>
-<link rel="stylesheet" href="../../public/css/nav.css"/>
-<link rel="stylesheet" href="../../public/css/shop.css"/>
-    <script src="../../public/js/app.js"></script>
-                <script src="../../public/js/op_panier.js"></script>
+    <link rel="stylesheet" href="../public/css/reset.css"/>
+<link rel="stylesheet" href="../public/css/nav.css"/>
+<link rel="stylesheet" href="../public/css/shop.css"/>
+    <script src="../public/js/app.js"></script>
+                <script src="../public/js/op_panier.js"></script>
     <title><?php echo $nom_categorie; ?></title>
 </head>
 <body>
-<?php include_once("../../model/nav.user.php"); ?>
+<?php include_once("../model/nav.php"); ?>
 
     <h1><?php echo $nom_categorie; ?></h1>
     <main class="container">

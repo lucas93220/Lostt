@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once ('../../controller/db.php');
+include_once ('../controller/db.php');
 
 if(isset($_GET["id"])) {
     $id = $_GET["id"];
