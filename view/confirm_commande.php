@@ -52,11 +52,6 @@ if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         $stmt->bindParam(':prixTotal', $prixTotal);
         
         $stmt->execute();
-
-        $total_quantity = 0;
-        foreach ($_SESSION['cart'] as $product) {
-            $total_quantity += $product['quantite'];
-        }
         
         foreach ($_SESSION['cart'] as $product) {
             $product_id = $product['product_id'];
@@ -64,28 +59,16 @@ if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             $quantity_requested = $product['quantite'];
         
             $quantity_column = 'QUANTITE_PRODUIT_' . $size;
-            $quantity = $product['quantite'];
-        
-            $sql_get_current_quantity = "SELECT $quantity_column FROM produit WHERE ID_PRODUIT = :product_id";
-            $stmt_get_current_quantity = $conn->prepare($sql_get_current_quantity);
-            $stmt_get_current_quantity->bindParam(':product_id', $product_id);
-            $stmt_get_current_quantity->execute();
-            $current_quantity = $stmt_get_current_quantity->fetchColumn();
-        
-            $new_quantity = max(0, $current_quantity - $quantity_requested);
-        
-            $sql_update_quantity = "UPDATE produit SET $quantity_column = :new_quantity WHERE ID_PRODUIT = :product_id";
+            
+            $sql_update_quantity = "UPDATE produit SET $quantity_column = $quantity_column - :quantity, QUANTITE_PRODUIT = QUANTITE_PRODUIT - :quantity WHERE ID_PRODUIT = :product_id";
             $stmt_update_quantity = $conn->prepare($sql_update_quantity);
-            $stmt_update_quantity->bindParam(':new_quantity', $new_quantity);
+            $stmt_update_quantity->bindParam(':quantity', $quantity_requested);
             $stmt_update_quantity->bindParam(':product_id', $product_id);
             $stmt_update_quantity->execute();
+        
+        
         }
         
-
-        $sql_update_total_quantity = "UPDATE produit SET QUANTITE_PRODUIT = QUANTITE_PRODUIT - :total_quantity";
-        $stmt_update_total_quantity = $conn->prepare($sql_update_total_quantity);
-        $stmt_update_total_quantity->bindParam(':total_quantity', $total_quantity);
-        $stmt_update_total_quantity->execute();
 
         unset($_SESSION['cart']);
 

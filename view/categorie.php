@@ -44,9 +44,11 @@ if(isset($_GET['id'])) {
             while ($row_article = $stmt_articles->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                 <div class="article">
-                <h2><a href="details_produit.php?id=<?php echo $row_article['ID_PRODUIT']; ?>"><?php echo $row_article['NOM_PRODUIT']; ?></h2>
+                <h2><a href="details_produit.php?id=<?php echo $row_article['ID_PRODUIT']; ?>"></h2>
                     <img src="<?php echo $row_article['IMAGE_PRODUIT']; ?>" alt="<?php echo $row_article['NOM_PRODUIT']; ?>">
-                    <p>Prix: <?php echo $row_article['PRIX_PRODUIT']; ?> €</p>
+                    <p><?php echo $row_article['NOM_PRODUIT']; ?></p>
+                    <p><?php echo $row_article['PRIX_PRODUIT']; ?> EUR</p>
+                    <hr>
                 </div></a>
                 <?php
             }

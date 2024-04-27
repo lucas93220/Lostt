@@ -29,6 +29,7 @@ include_once("../controller/db.php")
         <img src="<?php echo $row_article['IMAGE_PRODUIT']; ?>" alt="<?php echo $row_article['NOM_PRODUIT']; ?>">
         <p><?php echo $row_article['NOM_PRODUIT']; ?></p>
         <p><?php echo $row_article['PRIX_PRODUIT']; ?> EUR</p>
+        <hr>
       </div></a>
       
       
