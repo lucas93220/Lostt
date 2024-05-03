@@ -13,7 +13,7 @@ function addToCart(event, productId, productName, productPrice, size) {
     xhr.onload = function() {
         if (xhr.status === 200) {
             console.log(xhr.responseText);
-            window.location.reload(); 
+            updateCartContent(); // Mettre à jour le contenu du panier après l'ajout
         } else {
             console.error('Une erreur s\'est produite lors de l\'ajout au panier. Veuillez réessayer.');
         }
@@ -22,6 +22,16 @@ function addToCart(event, productId, productName, productPrice, size) {
         console.error('Une erreur s\'est produite lors de l\'ajout au panier. Veuillez réessayer.');
     };
     xhr.send(formData);
+}
+
+function updateCartContent() {
+    fetch('panier.php')
+        .then(response => response.text())
+        .then(data => {
+            const panierContent = document.getElementById('panier-content');
+            panierContent.innerHTML = data;
+        })
+        .catch(error => console.error('Erreur lors de la récupération du contenu du panier :', error));
 }
 
 function supprimerDuPanier(product_id, size) {
@@ -38,7 +48,7 @@ function supprimerDuPanier(product_id, size) {
         .then(response => response.text())
         .then(data => {
             console.log(data);
-            window.location.reload();
+            updateCartContent(); // Mettre à jour le contenu du panier après la suppression
         })
         .catch(error => console.error('Erreur lors de la suppression du produit:', error));
     }
@@ -58,10 +68,7 @@ function changerQuantite(product_id, size, newQuantity) {
     .then(response => response.text())
     .then(data => {
         console.log(data);
-        window.location.reload();
+        updateCartContent();
     })
     .catch(error => console.error('Erreur lors de la mise à jour de la quantité du produit:', error));
 }
-
-
-

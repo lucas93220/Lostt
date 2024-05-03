@@ -5,6 +5,7 @@ include_once('../controller/db.php');
 include_once('../controller/calculPanier.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['product_id'], $_POST['size'])) {
+    // Supprimer un produit du panier
     if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         $product_id = $_POST['product_id'];
         $size = $_POST['size'];
@@ -12,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
         foreach ($_SESSION['cart'] as $key => $product) {
             if ($product['product_id'] === $product_id && $product['size'] === $size) {
                 unset($_SESSION['cart'][$key]);
-                echo "Le produit a été supprimé du panier avec succès.";
+                // echo "Le produit a été supprimé du panier avec succès.";
                 exit;
             }
         }
@@ -23,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] === 'add' && isset($_POST['product_id'], $_POST['size'])) {
+    // Ajouter un produit au panier
     $product_id = $_POST['product_id'];
     $size = $_POST['size'];
 
@@ -42,6 +44,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
             }
         }
         if (!$product_already_in_cart) {
+            // Vérifier si la quantité demandée est disponible en stock
+            $quantity_column = 'QUANTITE_PRODUIT_' . $size;
+            $quantity_available = $product[$quantity_column];
+            $quantity_requested = 1; // Par défaut, vous ajoutez 1 article
+            if (isset($_SESSION['cart'])) {
+                foreach ($_SESSION['cart'] as $cart_product) {
+                    if ($cart_product['product_id'] === $product_id && $cart_product['size'] === $size) {
+                        $quantity_requested += $cart_product['quantite']; // Ajoutez la quantité déjà dans le panier
+                    }
+                }
+            }
+
+            if ($quantity_requested > $quantity_available) {
+                echo "Erreur: La quantité demandée pour le produit dépasse la quantité disponible en stock.";
+                exit;
+            }
+
             $_SESSION['cart'][] = array(
                 'product_id' => $product_id,
                 'size' => $size,
@@ -50,12 +69,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
                 'quantite' => 1
             );
         }
-        $sql_update_quantity = "UPDATE produit SET QUANTITE_PRODUIT = QUANTITE_PRODUIT + 1 WHERE ID_PRODUIT = :product_id";
-        $stmt_update_quantity = $conn->prepare($sql_update_quantity);
-        $stmt_update_quantity->bindParam(':product_id', $product_id);
-        $stmt_update_quantity->execute();
-
-        echo "Le produit a été ajouté au panier avec succès.";
     } else {
         echo "Erreur: Produit non trouvé dans la base de données.";
     }
@@ -75,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
         }
     }
 
-    echo "La quantité du produit a été mise à jour avec succès.";
+    // echo "La quantité du produit a été mise à jour avec succès.";
     exit;
 }
 
@@ -104,6 +117,23 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 
         } else {
             echo '<a href="invite.php">Valider la commande en tant qu\'invité</a>';
+        }
+    }
+
+    foreach ($_SESSION['cart'] as $cart_product) {
+        $product_id = $cart_product['product_id'];
+        $size = $cart_product['size'];
+        $quantity_requested = $cart_product['quantite'];
+
+        $sql = "SELECT QUANTITE_PRODUIT_" . $size . " AS quantity FROM produit WHERE ID_PRODUIT = :product_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':product_id', $product_id);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result['quantity'] < $quantity_requested) {
+            echo "Erreur: La quantité demandée pour le produit '{$product_id}' dépasse la quantité disponible en stock.";
+            exit;
         }
     }
 } else {
