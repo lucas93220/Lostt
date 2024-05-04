@@ -57,4 +57,43 @@ nav {
   padding: 5px 0;
 }
 
+#panier-content {
+  position: absolute;
+  top: 59px;
+  right: 0px;
+  background-color: #fff;
+  border: 1px solid black;
+  padding: 10px;
+  max-width: 30%;
+  display: flex;
+  z-index: 999;
+  flex-direction: column;
+}
 
+#panier-content input{
+  max-width: 7%;
+}
+
+.deleteButton {
+  margin: auto auto auto 4rem;
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 550ms;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  color: #000000;
+}
+
+.valideButton{
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 550ms;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  color: #000000;}
