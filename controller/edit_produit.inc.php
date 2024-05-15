@@ -19,40 +19,44 @@ if (isset($_GET["id"])) {
             $quantites = $_POST['quantite'];
             $quantite_total = array_sum($quantites);
 
-            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                $image_name = $_FILES['image']['name'];
-                $image_tmp_name = $_FILES['image']['tmp_name'];
+            try {
+                if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                    $image_name = $_FILES['image']['name'];
+                    $image_tmp_name = $_FILES['image']['tmp_name'];
 
-                $uploadDirectory ='../../uploads/';
-                if (!is_dir($uploadDirectory)) {
-                    mkdir($uploadDirectory, 0777, true);
-                }
+                    $uploadDirectory ='../../uploads/';
+                    if (!is_dir($uploadDirectory)) {
+                        mkdir($uploadDirectory, 0777, true);
+                    }
 
-                $targetFile = $uploadDirectory . uniqid() . '_' . basename($image_name);
+                    $targetFile = $uploadDirectory . uniqid() . '_' . basename($image_name);
 
-                if (move_uploaded_file($image_tmp_name, $targetFile)) {
-                    $sql = "UPDATE produit SET NOM_PRODUIT=?, PRIX_PRODUIT=?, IMAGE_PRODUIT=?, DESC_PRODUIT=?, ID_CATEGORIE=?, QUANTITE_PRODUIT_S=?, QUANTITE_PRODUIT_M=?, QUANTITE_PRODUIT_L=?, QUANTITE_PRODUIT_XL=?, QUANTITE_PRODUIT_XXL=?, QUANTITE_PRODUIT_U=? WHERE ID_PRODUIT=?";
+                    if (move_uploaded_file($image_tmp_name, $targetFile)) {
+                        $sql = "UPDATE produit SET NOM_PRODUIT=?, PRIX_PRODUIT=?, IMAGE_PRODUIT=?, DESC_PRODUIT=?, ID_CATEGORIE=?, QUANTITE_PRODUIT_S=?, QUANTITE_PRODUIT_M=?, QUANTITE_PRODUIT_L=?, QUANTITE_PRODUIT_XL=?, QUANTITE_PRODUIT_XXL=?, QUANTITE_PRODUIT_U=? WHERE ID_PRODUIT=?";
+                        $stmt = $conn->prepare($sql);
+                        if ($stmt->execute([$nom, $prix, $targetFile, $description, $categorie, $quantites['S'], $quantites['M'], $quantites['L'], $quantites['XL'], $quantites['XXL'], $quantites['Unique'], $id])) {
+                            echo "Produit mis à jour avec succès.";
+                            header("Location: update.php");
+                            exit();
+                        } else {
+                            echo "Erreur lors de la mise à jour du produit.";
+                        }
+                    } else {
+                        echo "Erreur lors de l'upload de l'image.";
+                    }
+                } else {
+                    $sql = "UPDATE produit SET NOM_PRODUIT=?, PRIX_PRODUIT=?, DESC_PRODUIT=?, ID_CATEGORIE=?, QUANTITE_PRODUIT_S=?, QUANTITE_PRODUIT_M=?, QUANTITE_PRODUIT_L=?, QUANTITE_PRODUIT_XL=?, QUANTITE_PRODUIT_XXL=?, QUANTITE_PRODUIT_U=? WHERE ID_PRODUIT=?";
                     $stmt = $conn->prepare($sql);
-                    if ($stmt->execute([$nom, $prix, $targetFile, $description, $categorie, $quantite_total, $quantites['S'], $quantites['M'], $quantites['L'], $quantites['XL'], $quantites['XXL'], $quantites['Unique'], $id])) {
+                    if ($stmt->execute([$nom, $prix, $description, $categorie, $quantites['S'], $quantites['M'], $quantites['L'], $quantites['XL'], $quantites['XXL'], $quantites['Unique'], $id])) {
                         echo "Produit mis à jour avec succès.";
                         header("Location: update.php");
                         exit();
                     } else {
                         echo "Erreur lors de la mise à jour du produit.";
                     }
-                } else {
-                    echo "Erreur lors de l'upload de l'image.";
                 }
-            } else {
-                $sql = "UPDATE produit SET NOM_PRODUIT=?, PRIX_PRODUIT=?, DESC_PRODUIT=?, ID_CATEGORIE=?, QUANTITE_PRODUIT_S=?, QUANTITE_PRODUIT_M=?, QUANTITE_PRODUIT_L=?, QUANTITE_PRODUIT_XL=?, QUANTITE_PRODUIT_XXL=?, QUANTITE_PRODUIT_U=? WHERE ID_PRODUIT=?";
-                $stmt = $conn->prepare($sql);
-                if ($stmt->execute([$nom, $prix, $description, $categorie, $quantites['S'], $quantites['M'], $quantites['L'], $quantites['XL'], $quantites['XXL'], $quantites['Unique'], $id])) {
-                    echo "Produit mis à jour avec succès.";
-                    header("Location: update.php");
-                    exit();
-                } else {
-                    echo "Erreur lors de la mise à jour du produit.";
-                }
+            } catch (PDOException $e) {
+                echo "Erreur PDO : " . $e->getMessage();
             }
         }
     } else {

@@ -1,3 +1,13 @@
+document.body.addEventListener('click', function(event) {
+    var panierContent = document.getElementById('panier-content');
+    var panierBtn = document.querySelector('.active');
+
+    if (!panierContent.contains(event.target) && !panierBtn.contains(event.target)) {
+        panierContent.style.display = 'none';
+    }
+});
+
+
 function addToCart(event, productId, productName, productPrice, size) {
     event.preventDefault();
 
@@ -72,3 +82,4 @@ function changerQuantite(product_id, size, newQuantity) {
     })
     .catch(error => console.error('Erreur lors de la mise à jour de la quantité du produit:', error));
 }
+
