@@ -8,8 +8,9 @@ try {
     $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
     $bdd = new PDO('mysql:host=localhost;dbname=lostt', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8', $pdo_options));
 
-    $sql = "SELECT * FROM user WHERE EMAIL_USER = '$email' ";
+    $sql = "SELECT * FROM user WHERE EMAIL_USER = :email";
     $result = $bdd->prepare($sql);
+    $result->bindParam(':email', $email);
     $result->execute();
 
     if (isset($_POST['EMAIL_USER']) && isset($_POST['MDP_USER'])) {
@@ -36,6 +37,4 @@ try {
 } catch (Exception $e) {
     die("Erreur de connexion : " . $e->getMessage());
 }
-
-
 ?>

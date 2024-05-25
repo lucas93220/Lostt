@@ -1,6 +1,8 @@
 <?php 
 session_start();
-include_once("../controller/add_produit.inc.php"); ?>
+include_once("../controller/add_produit.inc.php"); 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,15 +43,19 @@ include_once("../controller/add_produit.inc.php"); ?>
         ?>
     </select>
 </div>
-<div class="">
+<div>
 <input placeholder="Prix" type="text" class="" id="prix" name="prix" value="<?php echo $prix; ?>" required>
  </div>
-<div class="">
+<div>
    <input placeholder="Description" type="text" class="" id="description" name="description" value="<?php echo $description; ?>" required>
  </div>
-<div class="">
+<div>
      <input type="file" class="img-produit" id="image" name="image" value="<?php echo $image; ?>" required>
  </div>
+ <div>
+     <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+</div>
+
 <div class="form-group">
     <label for="quantite-s">Quantité disponible (S):</label>
     <input type="number" class="form-control" id="quantite-s" name="quantite[S]" value="0" min="0">

@@ -1,40 +1,55 @@
 <?php
 include_once('db.php');
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 
 $nom = $prix = '';
 $image = '';
 $description = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+        echo "<p class=\"error\">Token CSRF invalide.</p>";
+        exit;
+    }
+
     $nom = htmlspecialchars($_POST["nom"]);
     $prix = htmlspecialchars($_POST["prix"]);
     $description = htmlspecialchars($_POST["description"]);
-    $categorie = $_POST["categorie"];
+    $categorie = htmlspecialchars($_POST["categorie"]);
 
     if (empty($nom) || empty($prix) || empty($description)) {
-        echo "Les champs désignation, tarif et description sont obligatoires.";
+        echo "<p class=\"error\">Les champs désignation, tarif et description sont obligatoires.</p>";
     } else {
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
             $image_name = $_FILES['image']['name'];
             $image_tmp_name = $_FILES['image']['tmp_name'];
             $image_type = $_FILES['image']['type'];
+            $image_error = $_FILES['image']['error'];
 
-            $uploadDirectory ='../../uploads/';
+            if (!in_array($image_type, $allowedMimeTypes)) {
+                echo "<p class=\"error\">Type de fichier non supporté. Seuls les fichiers JPEG, PNG et GIF sont autorisés.</p>";
+                exit;
+            }
+
+            $uploadDirectory = '../../uploads/';
             if (!is_dir($uploadDirectory)) {
                 mkdir($uploadDirectory, 0777, true);
             }
 
-            $targetFile = $uploadDirectory . basename($image_name);
+            $targetFile = $uploadDirectory . uniqid() . '_' . basename($image_name);
 
             if (move_uploaded_file($image_tmp_name, $targetFile)) {
                 $image = $targetFile;
 
                 $quantites = $_POST['quantite'];
-
                 $quantite_totale = array_sum($quantites);
 
                 $sql = "INSERT INTO produit (NOM_PRODUIT, PRIX_PRODUIT, IMAGE_PRODUIT, DESC_PRODUIT, ID_CATEGORIE, QUANTITE_PRODUIT_S, QUANTITE_PRODUIT_M, QUANTITE_PRODUIT_L, QUANTITE_PRODUIT_XL, QUANTITE_PRODUIT_XXL, QUANTITE_PRODUIT_U) 
-        VALUES (:nom, :prix, :image, :description, :categorie, :quantite_s, :quantite_m, :quantite_l, :quantite_xl, :quantite_xxl, :quantite_u)";
+                VALUES (:nom, :prix, :image, :description, :categorie, :quantite_s, :quantite_m, :quantite_l, :quantite_xl, :quantite_xxl, :quantite_u)";
 
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':nom', $nom);
@@ -50,15 +65,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bindParam(':quantite_u', $quantites['Unique']);
 
                 if ($stmt->execute()) {
-                    echo "Article ajouté avec succès.";
+                    header("Location: update.php");
                 } else {
-                    echo "Erreur : " . $stmt->errorInfo()[2];
+                    echo "<p class=\"error\">Erreur : " . $stmt->errorInfo()[2] . "</p>";
                 }
             } else {
-                echo "Erreur lors de l'upload de l'image : " . $_FILES['image']['error'];
+                echo "<p class=\"error\">Erreur lors de l'upload de l'image : " . $image_error . "</p>";
             }
         } else {
-            echo "Veuillez sélectionner une image.";
+            echo "<p class=\"error\">Veuillez sélectionner une image.</p>";
         }
     }
 }

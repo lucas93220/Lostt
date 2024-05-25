@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;400&display=swap');
   
   .sucess {
     max-width: 800px;
@@ -11,6 +11,7 @@
   h1 {
     text-align: center;
     margin: 15px auto;
+    font-family: 'Kanit';
   }
   
   hr {
@@ -26,6 +27,7 @@
     margin: 1rem auto;
     font-size: 14px;
     font-weight: bold;
+    font-family: 'Kanit';
     text-decoration: none;
     transition: 550ms;
     background-color: #ffffff;

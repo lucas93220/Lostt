@@ -1,7 +1,8 @@
 <?php
 session_start();
-
 include_once ('../controller/db.php');
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,16 +24,19 @@ include_once ('../controller/db.php');
     include_once ('../controller/edit_produit.inc.php');
     ?>
     <form method="post" action="<?php echo isset($id) ? htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $id) : htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
-        <div class="">
+        <div>
             <input placeholder="Nom" type="text" class="" id="nom" name="nom" value="<?php echo isset($row["NOM_PRODUIT"]) ? $row["NOM_PRODUIT"] : ''; ?>" required>
         </div>
-        <div class="">
+        <div>
             <input placeholder="Prix" type="text" class="" id="prix" name="prix" value="<?php echo isset($row["PRIX_PRODUIT"]) ? $row["PRIX_PRODUIT"] : ''; ?>" required>
         </div>
-        <div class="">
+        <div>
             <input placeholder="Description" type="text" id="description" name="description" value="<?php echo isset($row["DESC_PRODUIT"]) ? $row["DESC_PRODUIT"] : ''; ?>" required>
         </div>
-        <div class="">
+        <div>
+            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+        </div>
+        <div>
             <select class="" id="categorie" name="categorie" required>
                 <option value="">Catégorie</option>
                 <?php

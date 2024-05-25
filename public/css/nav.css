@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;400&display=swap');
+
 header {
   background-color: #ffffff;
   border: solid 1px black;
@@ -34,6 +36,7 @@ nav {
   text-decoration: none;
   padding: 30px;
   transition: color 0.3s;
+  font-family: 'Kanit';
 }
 
 .navigation li a:hover {
@@ -68,6 +71,7 @@ nav {
   background-color: #fff;
   border: 1px solid black;
   padding: 10px;
+  font-family: 'Kanit';
   max-width: 30%;
   display: flex;
   z-index: 999;
@@ -76,6 +80,7 @@ nav {
 
 #panier-content input{
   max-width: 7%;
+  font-family: 'Kanit';
 }
 
 .deleteButton {
@@ -86,7 +91,7 @@ nav {
   font-weight: bold;
   text-decoration: none;
   cursor: pointer;
-
+  font-family: 'Kanit';
   transition: 550ms;
   background-color: #ffffff;
   border: 1px solid #000000;
@@ -99,6 +104,7 @@ nav {
   font-size: 14px;
   font-weight: bold;
   text-decoration: none;
+  font-family: 'Kanit';
   cursor: pointer;
   transition: 550ms;
   background-color: #ffffff;
