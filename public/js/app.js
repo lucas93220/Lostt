@@ -1,11 +1,8 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const panierLink = document.querySelector('a[href="panier.php"]');
+document.addEventListener("DOMContentLoaded", function () {
+    const panierLink = document.querySelector('a[href="../controller/panier.php"]');
     const panierContent = document.getElementById('panier-content');
 
-    panierLink.addEventListener('click', function(event) {
-        event.preventDefault();
-        togglePanierContent();
-    });
+
 
     function togglePanierContent() {
         if (panierContent.classList.contains('show')) {
@@ -14,10 +11,14 @@ document.addEventListener("DOMContentLoaded", function() {
             fetchPanierContent();
         }
     }
+    panierLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        togglePanierContent();
+    });
 
     function fetchPanierContent() {
-       
-        fetch('panier.php')
+
+        fetch('../controller/panier.php')
             .then(response => response.text())
             .then(data => {
                 panierContent.innerHTML = data;
@@ -32,6 +33,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function hidePanierContent() {
         panierContent.classList.remove('show');
-       
+
     }
 });

@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-include_once('../controller/db.php');
-include_once('../controller/calculPanier.php');
+include_once('../model/db.php');
+include_once('calculPanier.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['product_id'], $_POST['size'])) {
 
-    if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+    if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         $product_id = $_POST['product_id'];
         $size = $_POST['size'];
 
@@ -74,10 +74,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
         echo "Erreur: Produit non trouvé dans la base de données.";
     }
 }
-
-
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] === 'update_quantity' && isset($_POST['product_id'], $_POST['size'], $_POST['quantity'])) {
     $product_id = $_POST['product_id'];
     $size = $_POST['size'];
@@ -93,13 +89,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
     // echo "La quantité du produit a été mise à jour avec succès.";
     exit;
 }
-
-
-// ... Code précédent
-
 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    $panierVide = false; // Le panier n'est pas vide
-    $quantiteDepasseStock = false; // La quantité dépasse-t-elle le stock ?
+    $panierVide = false;
+    $quantiteDepasseStock = false;
     foreach ($_SESSION['cart'] as $cart_product) {
         if (is_array($cart_product) && isset($cart_product['product_id'], $cart_product['size'], $cart_product['quantite'])) {
             $product_id = $cart_product['product_id'];
@@ -113,9 +105,8 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($result['quantity'] < $quantity_requested) {
-                $quantiteDepasseStock = true; // La quantité dépasse le stock
+                $quantiteDepasseStock = true;
             }
-
             echo "<div>";
             echo "<p>" . $cart_product['nom'] . " : " . $cart_product['prix'] . " EUR, Taille : " . $cart_product['size'] . ", Quantité : ";
             echo "<input type='number' min='1' value='" . $cart_product['quantite'] . "' onchange='changerQuantite(" . $cart_product['product_id'] . ", \"" . $cart_product['size'] . "\", this.value)'>";
@@ -126,15 +117,12 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             echo "<p>Erreur: Format de produit invalide.</p>";
         }
     }
-
-    // Afficher le bouton de validation
     echo "<p>Total : " . calculerTotalPanier() . " EUR</p>";
     if ($quantiteDepasseStock) {
         echo "<p>La quantité demandée pour un produit dépasse la quantité disponible en stock. Veuillez ajuster votre commande.</p>";
     } else {
-        // Désactiver le bouton de validation si la quantité dépasse le stock
         if (isset($_SESSION['ID_USER'])) {
-            echo '<form method="post" action="confirm_commande.php">
+            echo '<form method="post" action="../controller/confirm_commande.php">
                     <input type="hidden" name="action" value="checkout">
                     <button class="valideButton" type="submit" ' . ($quantiteDepasseStock ? 'disabled' : '') . '>Valider la commande</button>
                   </form>';
@@ -143,8 +131,6 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         }
     }
 } else {
-    $panierVide = true; // Le panier est vide
+    $panierVide = true;
     echo "<p>Votre panier est vide.</p>";
 }
-
-?>

@@ -2,6 +2,6 @@
 session_start();
 $_SESSION = array();
 session_destroy();
-header("Location: connexion.php?logout=true");
+header("Location: ../view/connexion.php?logout=true");
 exit();
 ?>

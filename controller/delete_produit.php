@@ -1,8 +1,8 @@
 <?php
 session_start();
-include_once ('../controller/db.php');
+include_once('../model/db.php');
 
-if(isset($_GET["id"])) {
+if (isset($_GET["id"])) {
     $id = $_GET["id"];
 
     $sql = "DELETE FROM produit WHERE ID_PRODUIT = :id";
@@ -14,7 +14,7 @@ if(isset($_GET["id"])) {
         echo "Article supprimé avec succès.";
     } else {
         $errorInfo = $stmt->errorInfo();
-        echo "Erreur : " . $errorInfo[2]; 
+        echo "Erreur : " . $errorInfo[2];
     }
 } else {
     echo "ID non spécifié.";
@@ -22,6 +22,3 @@ if(isset($_GET["id"])) {
 
 header("Location: update.php");
 exit();
-
-
-?>

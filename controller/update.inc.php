@@ -33,4 +33,3 @@ if ($conn) {
 } else {
     echo "Erreur : Impossible de se connecter à la base de données.";
 }
-?>

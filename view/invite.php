@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Commande en tant qu'invité</title>
 </head>
 <body>
-<?php include_once("../model/nav.php"); ?>
+<?php include_once("nav.php"); ?>
 
 <h2>Commande en tant qu'invité</h2>
 <?php

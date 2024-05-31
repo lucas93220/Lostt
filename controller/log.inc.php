@@ -18,12 +18,12 @@ try {
 
         if ($result->rowCount() > 0 && password_verify($password, $data['MDP_USER'])) {
             echo "<p class=\"success\">Vous êtes bien connectés !</p>";
-    
+
             $_SESSION['ID_USER'] = $data['ID_USER'];
-            $_SESSION['EMAIL_USER'] = $email; 
-            $_SESSION['NOM_USER'] = $data['NOM_USER']; 
+            $_SESSION['EMAIL_USER'] = $email;
+            $_SESSION['NOM_USER'] = $data['NOM_USER'];
             $_SESSION['PRENOM_USER'] = $data['PRENOM_USER'];
-    
+
             if ($data['ROLE_USER'] === 'admin') {
                 $_SESSION['ROLE'] = 'admin';
                 header("Location: home.php");
@@ -37,4 +37,3 @@ try {
 } catch (Exception $e) {
     die("Erreur de connexion : " . $e->getMessage());
 }
-?>

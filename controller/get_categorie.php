@@ -1,5 +1,5 @@
 <?php
-include_once ('db.php');
+include_once('../model/db.php');
 
 $categories = array();
 
@@ -17,4 +17,3 @@ if ($result) {
 // $conn = null;
 
 return $categories;
-?>

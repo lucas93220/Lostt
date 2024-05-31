@@ -82,3 +82,14 @@ main{
     color: #ffffff;
 }
 
+@media screen and (max-width: 800px){
+  .container{
+     grid-template-columns: repeat(2, 1fr);
+  }
+  .deleteButton {
+    margin: 0;
+  }
+  .editButton, .deleteButton{
+    padding: 6px 6px;
+  }
+}

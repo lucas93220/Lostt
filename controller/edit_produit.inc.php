@@ -1,11 +1,11 @@
 <?php
-include_once('db.php');
+include_once('../model/db.php');
 if (!isset($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
 if (isset($_GET["id"])) {
-    $id = intval($_GET["id"]); 
+    $id = intval($_GET["id"]);
 
     $result = $conn->prepare("SELECT p.*, c.NOM_CATEGORIE FROM produit p JOIN categorie c ON p.ID_CATEGORIE = c.ID_CATEGORIE WHERE ID_PRODUIT = ?");
     $result->execute([$id]);
@@ -23,8 +23,8 @@ if (isset($_GET["id"])) {
             $nom = htmlspecialchars($_POST["nom"]);
             $prix = htmlspecialchars($_POST["prix"]);
             $description = htmlspecialchars($_POST["description"]);
-            $categorie = intval($_POST['categorie']); 
-            $quantites = array_map('intval', $_POST['quantite']); 
+            $categorie = intval($_POST['categorie']);
+            $quantites = array_map('intval', $_POST['quantite']);
 
             $quantite_total = array_sum($quantites);
             $errorMessage = '';
@@ -92,4 +92,3 @@ if (isset($_GET["id"])) {
     header("Location: update.php");
     exit();
 }
-?>

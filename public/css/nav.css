@@ -47,6 +47,7 @@ nav {
   display: none;
   position: absolute;
   background-color: #ffffff;
+  border: 1px solid black;
   padding: 10px;
 }
 
@@ -123,22 +124,26 @@ nav {
   transition: 550ms;
 }
 
-@media screen and (max-width: 768px) {
-  .navigation {
-    flex-direction: column; 
+@media screen and (max-width: 800px) {
+  nav {
+    display: block;
   }
-
+  
+  .navigation {
+    list-style-type: none;
+  }
+  
   .navigation li {
     display: block;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
   }
-
-  .sous-navigation {
-    position: static;
-    display: none; 
-  }
-
-  .navigation li:hover .sous-navigation {
-    display: block; 
+  
+  .navigation li a {
+    color: #000000;
+    display: block;
+    text-decoration: none;
+    padding: 5px;
+    transition: color 0.3s;
+    font-family: 'Kanit';
   }
 }
