@@ -46,6 +46,7 @@ nav {
 .sous-navigation {
   display: none;
   position: absolute;
+  top: 73px;
   background-color: #ffffff;
   border: 1px solid black;
   padding: 10px;
@@ -53,10 +54,12 @@ nav {
 
 .navigation li:hover .sous-navigation {
   display: block;
+  
 }
 
 .sous-navigation li {
   display: block;
+  
 }
 
 .sous-navigation li a {
@@ -67,7 +70,7 @@ nav {
 
 #panier-content {
   position: absolute;
-  top: 59px;
+  top: 73px;
   right: 0px;
   background-color: #fff;
   border: 1px solid black;
