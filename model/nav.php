@@ -3,7 +3,7 @@ include_once('../controller/get_categorie.php');
 ?>
 
 <header>
-        <a href="."><img class="logo" src="./asset/logo.png" alt="LOSTT"></a>
+        <a href="."><img class="logo" src="../public/asset/lostt.png" alt="LOSTT"></a>
         <nav>
             <ul class="navigation">
                 <li>
