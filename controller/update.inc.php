@@ -17,7 +17,7 @@ if ($conn) {
             echo '<p>Stock disponible: ' . htmlspecialchars($row['STOCK']) . '</p>';
 
             $editUrl = htmlspecialchars('edit_produit.php?id=' . $row['ID_PRODUIT']);
-            $deleteUrl = htmlspecialchars('delete_produit.php?id=' . $row['ID_PRODUIT']);
+            $deleteUrl = htmlspecialchars('../controller/delete_produit.php?id=' . $row['ID_PRODUIT']);
             echo '<a href="' . $editUrl . '" class="editButton">Modifier </a>';
             echo '<a href="' . $deleteUrl . '" class="deleteButton">Supprimer</a>';
             echo '</div>';

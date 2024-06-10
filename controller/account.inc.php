@@ -14,7 +14,7 @@
           echo "<p>ID Commande : " . $commande['ID_COMMANDE'] . "</p>";
           echo "<p>Date de commande : " . $commande['DATE_COMMANDE'] . "</p>";
           echo "<p>Statut de la commande : " . $commande['STATUT_COMMANDE'] . "</p>";
-          echo "<p>Quantité de produits : " . $commande['QUANTITE_PRODUIT'] . "</p>";
+        //   echo "<p>Quantité de produits : " . $commande['QUANTITE_PRODUIT'] . "</p>";
           echo "<p>Prix total : " . $commande['PRIXTOTAL_COMMANDE'] . " €</p>";
           echo "<hr>";
         }

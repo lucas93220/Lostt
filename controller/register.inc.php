@@ -1,12 +1,11 @@
 <?php
-session_start();
 if (!isset($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
 try {
     if (isset($_POST['submit'])) {
-        if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+        if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
             $_SESSION['errors'][] = "Token CSRF invalide.";
             header("Location: register.php");
             exit;
@@ -58,7 +57,7 @@ try {
                     $req->bindParam(':adresse', $adresse);
                     $req->execute();
 
-                    $_SESSION['success'] = "Inscription effectuée : <a href=\"view/connexion.php\" title=\"pub\">Connectez-vous</a>";
+                    $_SESSION['success'] = "Inscription effectuée : <a href=\"connexion.php\" title=\"pub\">Connectez-vous</a>";
                 }
             }
         }

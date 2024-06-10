@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include_once('../model/db.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -47,7 +49,7 @@ if (isset($_SESSION["PRENOM_USER"])) {
         ?>
         <form class="inscription" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <input placeholder="Nom" type="text" id="nom" name="NOM_USER" required> <br>
-            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+            <input type="hidden" name="csrf_token" value="<?php echo isset($_SESSION['csrf_token']) ? htmlspecialchars($_SESSION['csrf_token']) : ''; ?>">
             <input placeholder="Prenom" type="text" id="prenom" name="PRENOM_USER" required> <br>
             <input placeholder="Email" type="text" id="email" name="EMAIL_USER" required> <br>
             <input placeholder="Telephone" type="text" id="tel" name="TEL_USER" required> <br>
@@ -55,7 +57,7 @@ if (isset($_SESSION["PRENOM_USER"])) {
             <input placeholder="Ville" type="text" id="ville" name="VILLE_USER" required> <br>
             <input placeholder="Adresse" type="text" id="adresse" name="ADRESSE_USER" required> <br>
             <input placeholder="Mot de passe" type="password" id="mdp" name="MDP_USER" required> <br>
-            <input placeholder="Confirmez votre mot de passe" type="password" id="mdp" name="CONFIRM_USER" required> <br>
+            <input placeholder="Confirmez votre mot de passe" type="password" id="mdpConfirm" name="CONFIRM_USER" required> <br>
             <button class="button" type="submit" name="submit">Créer</button> <br>
         </form>
     </main>

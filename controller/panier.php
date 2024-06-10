@@ -119,7 +119,7 @@ if (!empty($_SESSION['cart'])) {
                     <button class="valideButton" type="submit" ' . ($quantiteDepasseStock ? 'disabled' : '') . '>Valider la commande</button>
                   </form>';
         } else {
-            echo '<a href="invite.php">Valider la commande en tant qu\'invité</a>';
+            echo "<button class='connexionButton' onclick=\"window.location.href='connexion.php'\">Connectez-vous</button>";
         }
     }
 } else {

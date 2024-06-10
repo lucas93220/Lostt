@@ -20,5 +20,5 @@ if (isset($_GET["id"])) {
     echo "ID non spécifié.";
 }
 
-header("Location: update.php");
+header("Location: ../view/update.php");
 exit();

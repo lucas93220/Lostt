@@ -1,11 +1,3 @@
-<?php
-include_once("../model/db.php");
-if (isset($_SESSION["PRENOM_USER"])) {
-    header("Location: index.php");
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -29,21 +21,18 @@ if (isset($_SESSION["PRENOM_USER"])) {
     <main class="connexion">
         <h2>Connexion</h2>
         <?php
-        include_once "../controller/log.inc.php";
+include_once('../controller/log.inc.php');
         ?>
         <form class="connexion" action="" method="post">
             <input placeholder="Email" type="text" id="email" name="EMAIL_USER" required>
             <br>
             <input placeholder="Mot de passe" type="password" id="password" name="MDP_USER" required>
-            <p class="pswForget"><a href=".">Mot de passe oublie ?</a></p>
+            <p class="pswForget"><a href=".">Mot de passe oublié ?</a></p>
             <br>
-            <button class="button" type="submit">Connexion</button>
+            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+            <button class="button" type="submit" name="submit">Connexion</button>
         </form>
-
-
-
         <p>Vous n'avez pas de compte? <a href="register.php">Inscrivez-vous ici</a></p>
-
     </main>
 
     <footer>

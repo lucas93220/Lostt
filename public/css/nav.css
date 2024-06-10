@@ -113,7 +113,21 @@ nav {
   transition: 550ms;
   background-color: #ffffff;
   border: 1px solid #000000;
-  color: #000000;}
+  color: #000000;
+}
+.connexionButton{
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: 'Kanit';
+  cursor: pointer;
+  transition: 550ms;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  color: #000000;
+}
 
   .valideButton:hover{
     background-color: #000000;
@@ -122,6 +136,11 @@ nav {
 }
 
 .deleteButton:hover{
+  background-color: #000000;
+  color: #ffffff;
+  transition: 550ms;
+}
+.connexionButton:hover{
   background-color: #000000;
   color: #ffffff;
   transition: 550ms;
@@ -148,5 +167,9 @@ nav {
     padding: 5px;
     transition: color 0.3s;
     font-family: 'Kanit';
+  }
+  #panier-content {
+        top: 261px;
+ 
   }
 }
