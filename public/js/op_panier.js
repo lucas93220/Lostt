@@ -1,12 +1,25 @@
-document.body.addEventListener('click', function (event) {
-    var panierContent = document.getElementById('panier-content');
-    var panierBtn = document.querySelector('.active');
+document.addEventListener('DOMContentLoaded', function () {
+    const panierContent = document.getElementById('panier-content');
+    const panierBtn = document.querySelector('.active');
 
-    if (!panierContent.contains(event.target) && !panierBtn.contains(event.target)) {
-        panierContent.style.display = 'none';
+    document.body.addEventListener('click', function (event) {
+        if (panierContent && panierContent.style.display === 'block' && !panierContent.contains(event.target) && !panierBtn.contains(event.target)) {
+            panierContent.style.display = 'none';
+        }
+    });
+
+    if (panierBtn) {
+        panierBtn.addEventListener('click', function (event) {
+            event.preventDefault();
+            if (panierContent.style.display === 'block') {
+                panierContent.style.display = 'none';
+            } else {
+                panierContent.style.display = 'block';
+                updateCartContent();
+            }
+        });
     }
 });
-
 
 function addToCart(event, productId, productName, productPrice, size) {
     event.preventDefault();
@@ -39,7 +52,10 @@ function updateCartContent() {
         .then(response => response.text())
         .then(data => {
             const panierContent = document.getElementById('panier-content');
-            panierContent.innerHTML = data;
+            if (panierContent) {
+                panierContent.innerHTML = data;
+                attachCartEventListeners();
+            }
         })
         .catch(error => console.error('Erreur lors de la récupération du contenu du panier :', error));
 }
@@ -83,3 +99,21 @@ function changerQuantite(product_id, size, newQuantity) {
         .catch(error => console.error('Erreur lors de la mise à jour de la quantité du produit:', error));
 }
 
+function attachCartEventListeners() {
+    document.querySelectorAll('.deleteButton').forEach(button => {
+        button.addEventListener('click', function () {
+            const productId = this.getAttribute('data-product-id');
+            const size = this.getAttribute('data-size');
+            supprimerDuPanier(productId, size);
+        });
+    });
+
+    document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.addEventListener('change', function () {
+            const productId = this.getAttribute('data-product-id');
+            const size = this.getAttribute('data-size');
+            const quantity = this.value;
+            changerQuantite(productId, size, quantity);
+        });
+    });
+}

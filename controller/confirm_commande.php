@@ -2,7 +2,6 @@
 session_start();
 include_once('../model/db.php');
 include_once('calculPanier.php');
-
 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] === 'checkout') {
@@ -48,8 +47,10 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 
         unset($_SESSION['cart']);
 
-        echo "La commande a été validée avec succès.";
+        echo "<p>La commande a été validée avec succès.</p>";
+        echo '<a href="../view/shop.php">Retourner dans la boutique</a>';
     }
 } else {
-    echo "Erreur: Votre panier est vide.";
+    echo "<p>Erreur: La commande n'a pas pu être effectuée, veuillez vérifier le contenu de votre panier.</p>";
+    echo '<a href="../view/shop.php">Retourner dans la boutique</a>';
 }

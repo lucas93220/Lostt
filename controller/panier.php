@@ -4,92 +4,84 @@ session_start();
 include_once('../model/db.php');
 include_once('calculPanier.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['product_id'], $_POST['size'])) {
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
 
-    if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-        $product_id = $_POST['product_id'];
-        $size = $_POST['size'];
-
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $action = $_POST['action'] ?? '';
+    $product_id = $_POST['product_id'] ?? '';
+    $size = $_POST['size'] ?? '';
+    
+    if ($action === 'delete' && $product_id && $size) {
         foreach ($_SESSION['cart'] as $key => $product) {
             if ($product['product_id'] === $product_id && $product['size'] === $size) {
                 unset($_SESSION['cart'][$key]);
-                // echo "Le produit a été supprimé du panier avec succès.";
+                $_SESSION['cart'] = array_values($_SESSION['cart']); // Réindexer les clés du tableau
                 exit;
             }
         }
         echo "Erreur: Produit non trouvé dans le panier.";
-    } else {
-        echo "Erreur: Le panier est vide.";
-    }
-}
+    } elseif ($action === 'add' && $product_id && $size) {
+        $sql = "SELECT * FROM produit WHERE ID_PRODUIT = :product_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':product_id', $product_id);
+        $stmt->execute();
+        $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] === 'add' && isset($_POST['product_id'], $_POST['size'])) {
-    $product_id = $_POST['product_id'];
-    $size = $_POST['size'];
-
-    $sql = "SELECT * FROM produit WHERE ID_PRODUIT = :product_id";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':product_id', $product_id);
-    $stmt->execute();
-    $product = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (!empty($product)) {
-        $existing_product_key = null;
-        foreach ($_SESSION['cart'] as $key => $cart_product) {
-            if ($cart_product['product_id'] === $product_id && $cart_product['size'] === $size) {
-                $existing_product_key = $key;
-                break;
+        if (!empty($product)) {
+            $existing_product_key = null;
+            foreach ($_SESSION['cart'] as $key => $cart_product) {
+                if ($cart_product['product_id'] === $product_id && $cart_product['size'] === $size) {
+                    $existing_product_key = $key;
+                    break;
+                }
             }
-        }
 
-        if ($existing_product_key !== null) {
-            $_SESSION['cart'][$existing_product_key]['quantite']++;
-        } else {
-            $quantity_column = 'QUANTITE_PRODUIT_' . $size;
-            $quantity_available = $product[$quantity_column];
-            $quantity_requested = 1;
+            if ($existing_product_key !== null) {
+                $_SESSION['cart'][$existing_product_key]['quantite']++;
+            } else {
+                $quantity_column = 'QUANTITE_PRODUIT_' . $size;
+                $quantity_available = $product[$quantity_column];
+                $quantity_requested = 1;
 
-            if (isset($_SESSION['cart'])) {
                 foreach ($_SESSION['cart'] as $cart_product) {
                     if ($cart_product['product_id'] === $product_id && $cart_product['size'] === $size) {
                         $quantity_requested += $cart_product['quantite'];
                     }
                 }
-            }
 
-            if ($quantity_requested > $quantity_available) {
-                echo "Erreur: La quantité demandée pour le produit dépasse la quantité disponible en stock.";
-                exit;
-            }
+                if ($quantity_requested > $quantity_available) {
+                    echo "Erreur: La quantité demandée pour le produit dépasse la quantité disponible en stock.";
+                    exit;
+                }
 
-            $_SESSION['cart'][] = array(
-                'product_id' => $product_id,
-                'size' => $size,
-                'nom' => $product['NOM_PRODUIT'],
-                'prix' => $product['PRIX_PRODUIT'],
-                'quantite' => 1
-            );
+                $_SESSION['cart'][] = array(
+                    'product_id' => $product_id,
+                    'size' => $size,
+                    'nom' => $product['NOM_PRODUIT'],
+                    'prix' => $product['PRIX_PRODUIT'],
+                    'quantite' => 1
+                );
+            }
+        } else {
+            echo "Erreur: Produit non trouvé dans la base de données.";
         }
-    } else {
-        echo "Erreur: Produit non trouvé dans la base de données.";
+    } elseif ($action === 'update_quantity' && $product_id && $size && isset($_POST['quantity'])) {
+        $new_quantity = (int)$_POST['quantity'];
+
+        foreach ($_SESSION['cart'] as &$cart_product) {
+            if ($cart_product['product_id'] === $product_id && $cart_product['size'] === $size) {
+                $cart_product['quantite'] = $new_quantity;
+                break;
+            }
+        }
+
+        exit;
     }
 }
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] === 'update_quantity' && isset($_POST['product_id'], $_POST['size'], $_POST['quantity'])) {
-    $product_id = $_POST['product_id'];
-    $size = $_POST['size'];
-    $new_quantity = $_POST['quantity'];
 
-    foreach ($_SESSION['cart'] as &$cart_product) {
-        if ($cart_product['product_id'] === $product_id && $cart_product['size'] === $size) {
-            $cart_product['quantite'] = $new_quantity;
-            break;
-        }
-    }
-
-    // echo "La quantité du produit a été mise à jour avec succès.";
-    exit;
-}
-if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+if (!empty($_SESSION['cart'])) {
     $panierVide = false;
     $quantiteDepasseStock = false;
     foreach ($_SESSION['cart'] as $cart_product) {
@@ -108,9 +100,9 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 $quantiteDepasseStock = true;
             }
             echo "<div>";
-            echo "<p>" . $cart_product['nom'] . " : " . $cart_product['prix'] . " EUR, Taille : " . $cart_product['size'] . ", Quantité : ";
-            echo "<input type='number' min='1' value='" . $cart_product['quantite'] . "' onchange='changerQuantite(" . $cart_product['product_id'] . ", \"" . $cart_product['size'] . "\", this.value)'>";
-            echo "<button class='deleteButton' onclick='supprimerDuPanier(" . $cart_product['product_id'] . ", \"" . $cart_product['size'] . "\")' type='button'>Supprimer</button></p>";
+            echo "<p>" . htmlspecialchars($cart_product['nom']) . " : " . htmlspecialchars($cart_product['prix']) . " EUR, Taille : " . htmlspecialchars($cart_product['size']) . ", Quantité : ";
+            echo "<input type='number' min='1' value='" . htmlspecialchars($cart_product['quantite']) . "' onchange='changerQuantite(" . htmlspecialchars($cart_product['product_id']) . ", \"" . htmlspecialchars($cart_product['size']) . "\", this.value)'>";
+            echo "<button class='deleteButton' onclick='supprimerDuPanier(" . htmlspecialchars($cart_product['product_id']) . ", \"" . htmlspecialchars($cart_product['size']) . "\")' type='button'>Supprimer</button></p>";
             echo "<hr>";
             echo "</div>";
         } else {
@@ -134,3 +126,4 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     $panierVide = true;
     echo "<p>Votre panier est vide.</p>";
 }
+?>
