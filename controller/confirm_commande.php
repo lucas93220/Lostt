@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once('../model/db.php');
 include_once('calculPanier.php');
 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
@@ -54,3 +53,4 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     echo "<p>Erreur: La commande n'a pas pu être effectuée, veuillez vérifier le contenu de votre panier.</p>";
     echo '<a href="../view/shop.php">Retourner dans la boutique</a>';
 }
+?>

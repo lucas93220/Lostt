@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         foreach ($_SESSION['cart'] as $key => $product) {
             if ($product['product_id'] === $product_id && $product['size'] === $size) {
                 unset($_SESSION['cart'][$key]);
-                $_SESSION['cart'] = array_values($_SESSION['cart']); // Réindexer les clés du tableau
+                $_SESSION['cart'] = array_values($_SESSION['cart']);
                 exit;
             }
         }
@@ -114,7 +114,7 @@ if (!empty($_SESSION['cart'])) {
         echo "<p>La quantité demandée pour un produit dépasse la quantité disponible en stock. Veuillez ajuster votre commande.</p>";
     } else {
         if (isset($_SESSION['ID_USER'])) {
-            echo '<form method="post" action="../controller/confirm_commande.php">
+            echo '<form method="post" action="../view/confirmation.php">
                     <input type="hidden" name="action" value="checkout">
                     <button class="valideButton" type="submit" ' . ($quantiteDepasseStock ? 'disabled' : '') . '>Valider la commande</button>
                   </form>';
