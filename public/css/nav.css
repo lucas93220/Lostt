@@ -173,3 +173,14 @@ nav {
  
   }
 }
+
+@media screen and (max-width: 850px) {
+  .navigation li a {
+    color: #000000;
+    display: block;
+    text-decoration: none;
+    padding: 5px;
+    transition: color 0.3s;
+    font-family: 'Kanit';
+  }
+}
