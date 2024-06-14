@@ -28,7 +28,7 @@ if (isset($_SESSION["PRENOM_USER"])) {
     <link rel="stylesheet" href="../public/css/nav.css" />
     <link rel="stylesheet" href="../public/css/form.css" />
 
-    <title>Inscription</title>
+    <title>Créer un compte​</title>
 </head>
 
 <body>

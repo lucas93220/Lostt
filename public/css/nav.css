@@ -165,7 +165,9 @@ nav {
 
   }
   #panier-content {
-        top: 261px;
+        top: 211px;
+        max-width: 100%;
+
  
   }
 }

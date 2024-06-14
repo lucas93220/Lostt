@@ -34,7 +34,7 @@ try {
         $result->execute();
 
         if ($result->rowCount() > 0) {
-            $_SESSION['errors'][] = "Cette adresse mail est déjà utilisée !!!";
+            $_SESSION['errors'][] = "Cette adresse mail est déjà utilisée.";
         } else {
             if ($password !== $confirmPassword) {
                 $_SESSION['errors'][] = "Les mots de passe ne correspondent pas.";
@@ -66,3 +66,4 @@ try {
 } catch (Exception $e) {
     die("Erreur de connexion : " . $e->getMessage());
 }
+?>
